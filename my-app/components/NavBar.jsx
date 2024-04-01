@@ -76,6 +76,10 @@ const MobileNavContainer = styled.div`
   align-items: center;
 `;
 
+const MobileTitleHide = styled.div`
+  padding-top: 8px;
+`;
+
 export default function NavBar() {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -104,6 +108,12 @@ export default function NavBar() {
       {/* MOBILE */}
       <MainWrapperMobile>
           <MobileNavContainer>
+            {
+              !mobileNavOpen && 
+              <MobileTitleHide>
+                <NavLinks href='/'>Tremelo</NavLinks>
+              </MobileTitleHide>
+            }
             <MobileMenuButtonContainer onClick={handleMobileNav}>
               <CiMenuBurger />
             </MobileMenuButtonContainer>
