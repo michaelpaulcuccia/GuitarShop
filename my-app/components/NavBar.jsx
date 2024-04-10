@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Nunito } from 'next/font/google';
-import styled from 'styled-components';
+import styled, {keyframes } from 'styled-components';
 import { CiUser } from "react-icons/ci";
 import { CiBellOn } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
@@ -10,8 +10,17 @@ import { mobileBreakpoint } from '../constants';
 
 const nunito = Nunito({ subsets: ["latin"] });
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const Root = styled.div`
-  background-color: #FFC72C;
+  //background-color: #FFC72C;
   color: black;
 `;
 
@@ -79,6 +88,10 @@ const MobileNavContainer = styled.div`
   align-items: center;
 `;
 
+const OpenMobileNavContainer = styled(MobileNavContainer)`
+  animation: ${fadeIn} 0.5s ease;
+`;
+
 const MobileTitleHide = styled.div`
   padding-top: 8px;
 `;
@@ -122,7 +135,7 @@ export default function NavBar() {
             </MobileMenuButtonContainer>
             {
               mobileNavOpen && 
-              <>
+              <OpenMobileNavContainer>
                 <NavLinks href='/'>Tremelo</NavLinks>
                 <NavLinks href='/'>Home</NavLinks>
                 <NavLinks href='/'>Instruments</NavLinks>
@@ -132,7 +145,7 @@ export default function NavBar() {
                   <div><CiBellOn size="24px" /></div>
                   <div><CiUser size="24px" /></div>
                 </IconContainer>
-              </>
+              </OpenMobileNavContainer>
             }
           </MobileNavContainer>
       </MainWrapperMobile>
