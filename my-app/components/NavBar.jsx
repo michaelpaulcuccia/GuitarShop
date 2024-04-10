@@ -1,17 +1,19 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { Nunito } from 'next/font/google';
 import styled from 'styled-components';
 import { CiUser } from "react-icons/ci";
 import { CiBellOn } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
 import { mobileBreakpoint } from '../constants';
 
+const nunito = Nunito({ subsets: ["latin"] });
+
 const Root = styled.div`
   background-color: #FFC72C;
   color: black;
 `;
-
 
 const MainWrapperDesktop = styled.div`
   display: flex;
@@ -29,6 +31,7 @@ const LeftSideLinks = styled.div`
 `;
 
 const NavLinks = styled(Link)`
+  font-family: ${nunito} !important;
   text-decoration: none;
   padding-right: 12px;
   font-size: 18px;
@@ -89,7 +92,7 @@ export default function NavBar() {
   }
 
   return (
-    <Root>
+    <Root className={nunito.className}>
       <MainWrapperDesktop>
           <LeftSideLinks>
             <NavLinks href='/'>Tremelo</NavLinks>
