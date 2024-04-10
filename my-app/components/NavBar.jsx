@@ -1,14 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Nunito } from 'next/font/google';
+import { Nunito, Dancing_Script } from 'next/font/google';
 import styled, {keyframes } from 'styled-components';
+import Container from './Container';
 import { CiUser } from "react-icons/ci";
 import { CiBellOn } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
 import { mobileBreakpoint } from '../constants';
 
 const nunito = Nunito({ subsets: ["latin"] });
+const dancing_script = Dancing_Script({ weight: ["700"], subsets: ["latin"] });
 
 const fadeIn = keyframes`
   from {
@@ -20,8 +22,11 @@ const fadeIn = keyframes`
 `;
 
 const Root = styled.div`
-  //background-color: #FFC72C;
   color: black;
+`;
+
+const Line = styled.div`
+  border-top: 1px solid rgb(224,224,224);
 `;
 
 const MainWrapperDesktop = styled.div`
@@ -53,7 +58,7 @@ const NavLinks = styled(Link)`
   }
 
   @media (max-width: ${mobileBreakpoint}) {
-    padding: 1.75px 0;
+    padding: 8px 0;
   }
 `;
 
@@ -66,6 +71,10 @@ const RightSideUser = styled.div`
 
 const IconContainer = styled.div`
   display: flex;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    padding: 8px 0;
+  }
 `;
 
 const MainWrapperMobile = styled.div`
@@ -90,6 +99,7 @@ const MobileNavContainer = styled.div`
 
 const OpenMobileNavContainer = styled(MobileNavContainer)`
   animation: ${fadeIn} 0.5s ease;
+  height: 100vh;
 `;
 
 const MobileTitleHide = styled.div`
@@ -105,50 +115,56 @@ export default function NavBar() {
   }
 
   return (
-    <Root className={nunito.className}>
-      <MainWrapperDesktop>
-          <LeftSideLinks>
-            <NavLinks href='/'>Tremelo</NavLinks>
-            <NavLinks href='/'>Home</NavLinks>
-            <NavLinks href='/'>Instruments</NavLinks>
-            <NavLinks href='/'>Add Instruments</NavLinks>
-          </LeftSideLinks>
-          <RightSideUser>
-            <NavLinks href='/'>Login or Register</NavLinks>
-            <IconContainer>
-              <div><CiBellOn size="24px" /></div>
-              <div><CiUser size="24px" /></div>
-            </IconContainer>
-          </RightSideUser>
-      </MainWrapperDesktop>
-      {/* MOBILE */}
-      <MainWrapperMobile>
-          <MobileNavContainer>
-            {
-              !mobileNavOpen && 
-              <MobileTitleHide>
-                <NavLinks href='/'>Tremelo</NavLinks>
-              </MobileTitleHide>
-            }
-            <MobileMenuButtonContainer onClick={handleMobileNav}>
-              <CiMenuBurger />
-            </MobileMenuButtonContainer>
-            {
-              mobileNavOpen && 
-              <OpenMobileNavContainer>
-                <NavLinks href='/'>Tremelo</NavLinks>
-                <NavLinks href='/'>Home</NavLinks>
-                <NavLinks href='/'>Instruments</NavLinks>
-                <NavLinks href='/'>Add Instruments</NavLinks>
-                <NavLinks href='/'>Login or Register</NavLinks>
+    <Root>
+      <Line />
+        <Container>
+          <MainWrapperDesktop>
+              <LeftSideLinks>
+                <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                <NavLinks href='/' className={nunito.className}>Home</NavLinks>
+                <NavLinks href='/' className={nunito.className}>Instruments</NavLinks>
+                <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
+              </LeftSideLinks>
+              <RightSideUser>
+                <NavLinks href='/' className={nunito.className}>Login or Register</NavLinks>
                 <IconContainer>
                   <div><CiBellOn size="24px" /></div>
                   <div><CiUser size="24px" /></div>
                 </IconContainer>
-              </OpenMobileNavContainer>
-            }
-          </MobileNavContainer>
-      </MainWrapperMobile>
+              </RightSideUser>
+          </MainWrapperDesktop>
+        </Container>
+      <Line />
+      {/* MOBILE */}
+      <Container>
+        <MainWrapperMobile>
+            <MobileNavContainer>
+              {
+                !mobileNavOpen && 
+                <MobileTitleHide>
+                  <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                </MobileTitleHide>
+              }
+              <MobileMenuButtonContainer onClick={handleMobileNav}>
+                <CiMenuBurger />
+              </MobileMenuButtonContainer>
+              {
+                mobileNavOpen && 
+                <OpenMobileNavContainer>
+                  <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                  <NavLinks href='/' className={nunito.className}>Home</NavLinks>
+                  <NavLinks href='/' className={nunito.className}>Instruments</NavLinks>
+                  <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
+                  <NavLinks href='/' className={nunito.className}>Login or Register</NavLinks>
+                  <IconContainer>
+                    <div><CiBellOn size="24px" /></div>
+                    <div><CiUser size="24px" /></div>
+                  </IconContainer>
+                </OpenMobileNavContainer>
+              }
+            </MobileNavContainer>
+        </MainWrapperMobile>
+      </Container>
     </Root>
   )
 }
