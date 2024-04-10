@@ -1,8 +1,17 @@
+'use client';
 import React from 'react';
+import { usePathname } from 'next/navigation'
 
 export default function page() {
-  console.log('on server only');
+
+  const pathname = usePathname();
+  let trimmedPathname;
+
+  if (pathname) {
+    trimmedPathname = pathname.replace(/^\/instruments\//, '');
+  }
+  
   return (
-    <div>welcome to instruments id</div>
+    <div>welcome to instruments {trimmedPathname}</div>
   )
 }
