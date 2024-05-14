@@ -41,13 +41,14 @@ const MainWrapperDesktop = styled.div`
 
 const LeftSideLinks = styled.div`
   display: flex;
+  align-items: center;
   padding-left: 12px;
 `;
 
 const NavLinks = styled(Link)`
   font-family: ${nunito} !important;
   text-decoration: none;
-  padding-right: 12px;
+  padding-right: 22px;
   font-size: 18px;
   color: inherit;
   cursor: pointer;
@@ -106,6 +107,10 @@ const MobileTitleHide = styled.div`
   padding-top: 8px;
 `;
 
+const inlineStyle = {
+  fontSize: '24px !important',
+};
+
 export default function NavBar() {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -120,9 +125,9 @@ export default function NavBar() {
         <Container>
           <MainWrapperDesktop>
               <LeftSideLinks>
-                <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                <NavLinks href='/' className={dancing_script.className} style={{ fontSize: '34px'}}>Tremelo</NavLinks>
                 <NavLinks href='/' className={nunito.className}>Home</NavLinks>
-                <NavLinks href='/' className={nunito.className}>Instruments</NavLinks>
+                <NavLinks href='/instruments' className={nunito.className}>Instruments</NavLinks>
                 <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
               </LeftSideLinks>
               <RightSideUser>
@@ -142,7 +147,7 @@ export default function NavBar() {
               {
                 !mobileNavOpen && 
                 <MobileTitleHide>
-                  <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                  <NavLinks href='/' className={dancing_script.className} style={{ fontSize:'24px'}}>Tremelo</NavLinks>
                 </MobileTitleHide>
               }
               <MobileMenuButtonContainer onClick={handleMobileNav}>
@@ -151,9 +156,9 @@ export default function NavBar() {
               {
                 mobileNavOpen && 
                 <OpenMobileNavContainer>
-                  <NavLinks href='/' className={dancing_script.className}>Tremelo</NavLinks>
+                  <NavLinks href='/' className={dancing_script.className} style={{ fontSize:'24px'}}>Tremelo</NavLinks>
                   <NavLinks href='/' className={nunito.className}>Home</NavLinks>
-                  <NavLinks href='/' className={nunito.className}>Instruments</NavLinks>
+                  <NavLinks href='/instruments' className={nunito.className}>Instruments</NavLinks>
                   <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
                   <NavLinks href='/' className={nunito.className}>Login or Register</NavLinks>
                   <IconContainer>
