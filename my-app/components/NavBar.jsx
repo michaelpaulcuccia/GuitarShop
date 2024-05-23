@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Nunito, Dancing_Script } from 'next/font/google';
+import { Dancing_Script } from 'next/font/google';
 import styled, {keyframes } from 'styled-components';
 import Container from './Container';
 import { CiUser } from "react-icons/ci";
@@ -9,7 +9,6 @@ import { CiBellOn } from "react-icons/ci";
 import { CiMenuBurger } from "react-icons/ci";
 import { mobileBreakpoint } from '../constants';
 
-const nunito = Nunito({ subsets: ["latin"] });
 const dancing_script = Dancing_Script({ weight: ["700"], subsets: ["latin"] });
 
 const fadeIn = keyframes`
@@ -45,8 +44,8 @@ const LeftSideLinks = styled.div`
   padding-left: 12px;
 `;
 
+
 const NavLinks = styled(Link)`
-  font-family: ${nunito} !important;
   text-decoration: none;
   padding-right: 22px;
   font-size: 18px;
@@ -54,8 +53,7 @@ const NavLinks = styled(Link)`
   cursor: pointer;
 
   &:hover {
-    font-style: italic;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   @media (max-width: ${mobileBreakpoint}) {
@@ -106,11 +104,6 @@ const OpenMobileNavContainer = styled(MobileNavContainer)`
 const MobileTitleHide = styled.div`
   padding-top: 8px;
 `;
-
-const inlineStyle = {
-  fontSize: '24px !important',
-};
-
 export default function NavBar() {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -126,12 +119,11 @@ export default function NavBar() {
           <MainWrapperDesktop>
               <LeftSideLinks>
                 <NavLinks href='/' className={dancing_script.className} style={{ fontSize: '34px'}}>Tremelo</NavLinks>
-                <NavLinks href='/' className={nunito.className}>Home</NavLinks>
-                <NavLinks href='/instruments' className={nunito.className}>Instruments</NavLinks>
-                <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
+                <NavLinks href='/instruments'>Instruments</NavLinks>
+                <NavLinks href='/'>Add Instruments</NavLinks>
               </LeftSideLinks>
               <RightSideUser>
-                <NavLinks href='/' className={nunito.className}>Login or Register</NavLinks>
+                <NavLinks href='/'>Login or Register</NavLinks>
                 <IconContainer>
                   <div><CiBellOn size="24px" /></div>
                   <div><CiUser size="24px" /></div>
@@ -147,7 +139,7 @@ export default function NavBar() {
               {
                 !mobileNavOpen && 
                 <MobileTitleHide>
-                  <NavLinks href='/' className={dancing_script.className} style={{ fontSize:'24px'}}>Tremelo</NavLinks>
+                  <NavLinks href='/' className={dancing_script.className} style={{ fontSize:'32px'}}>Tremelo</NavLinks>
                 </MobileTitleHide>
               }
               <MobileMenuButtonContainer onClick={handleMobileNav}>
@@ -157,10 +149,9 @@ export default function NavBar() {
                 mobileNavOpen && 
                 <OpenMobileNavContainer>
                   <NavLinks href='/' className={dancing_script.className} style={{ fontSize:'24px'}}>Tremelo</NavLinks>
-                  <NavLinks href='/' className={nunito.className}>Home</NavLinks>
-                  <NavLinks href='/instruments' className={nunito.className}>Instruments</NavLinks>
-                  <NavLinks href='/' className={nunito.className}>Add Instruments</NavLinks>
-                  <NavLinks href='/' className={nunito.className}>Login or Register</NavLinks>
+                  <NavLinks href='/instruments'>Instruments</NavLinks>
+                  <NavLinks href='/'>Add Instruments</NavLinks>
+                  <NavLinks href='/'>Login or Register</NavLinks>
                   <IconContainer>
                     <div><CiBellOn size="24px" /></div>
                     <div><CiUser size="24px" /></div>
