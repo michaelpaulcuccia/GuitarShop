@@ -1,9 +1,12 @@
 import connectDB from "../../../../config/database";
+import Instrument from "../../../../models/Instrument";
 
-export const GET = async (req) => {
+//ROUTE: /api/instruments
+export const GET = async () => {
   try {
     await connectDB();
-    return new Response(JSON.stringify({ message: "Hello!" }, { status: 200 }));
+    const instruments = await Instrument.find({});
+    return new Response(JSON.stringify(instruments));
   } catch (error) {
     console.log(error);
     return new Response("Error found in app/api/instruments/route.js", {
