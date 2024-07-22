@@ -28,19 +28,23 @@ const Home = async () => {
   return (
     <Root>
       <h1>home</h1>
-      {instruments.map((item, i) => (
-        <div key={i}>
-          <h2>
-            {item.brand} {item.modelType}
-          </h2>
-          <Image
-            src={`${item.images}`}
-            alt={`${item.brand}`}
-            width={775}
-            height={750}
-          />
-        </div>
-      ))}
+      {instruments.length !== 0 ? (
+        instruments.map((item, i) => (
+          <div key={i}>
+            <h2>
+              {item.brand} {item.modelType}
+            </h2>
+            <Image
+              src={`${item.images}`}
+              alt={`${item.brand}`}
+              width={775}
+              height={750}
+            />
+          </div>
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
     </Root>
   );
 };
