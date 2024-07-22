@@ -1,8 +1,13 @@
+import connectDB from "../../../../config/database";
+
 export const GET = async (req) => {
   try {
-    return new Response("Hello World", { status: 200 });
+    await connectDB();
+    return new Response(JSON.stringify({ message: "Hello!" }, { status: 200 }));
   } catch (error) {
     console.log(error);
-    return new Response("Problem!", { status: 500 });
+    return new Response("Error found in app/api/instruments/route.js", {
+      status: 500,
+    });
   }
 };
