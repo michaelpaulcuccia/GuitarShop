@@ -1,6 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import styled from "styled-components";
+import SlashPrice from "./Text/SlashPrice";
+
+const ComponentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px black solid;
+  padding: 24px 32px;
+`;
 
 export default function DataReturn() {
   const [data, setData] = useState(null);
@@ -39,20 +49,23 @@ export default function DataReturn() {
   }
 
   return (
-    <>
+    <ComponentWrapper>
       {data.map((item, i) => (
         <div key={i}>
-          <h2>
+          <h1>
             {item.brand} {item.modelType}
-          </h2>
+          </h1>
+          <SlashPrice price={item.price} addOn={100} />
+          <p>${item.price}</p>
           <Image
             src={`${item.images}`}
             alt={`${item.brand}`}
-            width={775}
-            height={750}
+            width={607.5}
+            height={492}
+            //layout="responsive"
           />
         </div>
       ))}
-    </>
+    </ComponentWrapper>
   );
 }
