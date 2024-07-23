@@ -6,19 +6,24 @@ import ItemHeadline from "./Text/ItemHeadline";
 import SlashPrice from "./Text/SlashPrice";
 import Price from "./Text/Price";
 import StarHandler from "./StarHandler";
-import { IoStar, IoStarHalf } from "react-icons/io5";
+import Financing from "./Text/Financing";
 
 const ItemContainer = styled.div`
   display: flex;
-  border: 1px black solid;
-  padding: 24px 32px;
+  align-content: center;
+  padding: 48px 32px;
 `;
 
 const TitlePriceImageContainer = styled.div`
   display: inline-block;
 `;
 
-const DescriptionContainer = styled.div``;
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 150px;
+`;
 
 export default function FeaturedItem() {
   const [data, setData] = useState(null);
@@ -58,6 +63,25 @@ export default function FeaturedItem() {
 
   return (
     <ItemContainer>
+      <DescriptionContainer>
+        <ItemHeadline>
+          Rock Your World with the Ultimate Bass Guitar Sale! 🎸
+        </ItemHeadline>
+        <br />
+        <p>
+          Looking to lay down some groovy bass lines? Our featured{" "}
+          {data[0].brand} {data[0].modelType} is just what you need!
+        </p>
+        <br />
+        <p>
+          Perfect for both beginners and seasoned pros, this bass guitar boasts
+          rich, deep tones and exceptional playability. Crafted with precision,
+          it offers a sleek design and durable build, ensuring you’re ready to
+          rock for years to come.
+        </p>
+        <br />
+        <Financing price={data[0].price} />
+      </DescriptionContainer>
       <TitlePriceImageContainer>
         {data.map((item, i) => (
           <div key={i}>
@@ -80,11 +104,6 @@ export default function FeaturedItem() {
           </div>
         ))}
       </TitlePriceImageContainer>
-      <DescriptionContainer>
-        {data.map((item, i) => (
-          <div key={i}>{item.description}</div>
-        ))}
-      </DescriptionContainer>
     </ItemContainer>
   );
 }
