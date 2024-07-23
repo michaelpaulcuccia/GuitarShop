@@ -2,11 +2,6 @@ import { Schema, model, models } from "mongoose";
 
 const InstrumentSchema = new Schema(
   {
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     brand: {
       type: String,
       required: true,
@@ -21,12 +16,20 @@ const InstrumentSchema = new Schema(
     },
     electric: {
       type: Boolean,
+      default: true,
+      required: true,
     },
-    acoustic: {
+    isBass: {
       type: Boolean,
+      default: false,
+      required: true,
     },
     numberOfStrings: {
       type: Number,
+    },
+    stars: {
+      type: Number,
+      required: true,
     },
     description: {
       type: String,
