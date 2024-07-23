@@ -1,25 +1,60 @@
 import React from "react";
 import { IoStar, IoStarHalf } from "react-icons/io5";
 
-const StarHandler = ({ rating }) => {
-  //for some reason, the number taken in has to added to a new variable to work ???
-  let newNum = rating;
-  console.log(newNum);
+//ABSOLUTELY could use a refactor but I had a whole lot of trouble with the "number" I was getting back from MongoDB
 
-  //check for decimal point
-  const hasDecimalPoint = (rating = rating.toString().includes("."));
-
-  //if decimal exists, subtract it
-  let numNoDecimal;
-  if (hasDecimalPoint) {
-    numNoDecimal = newNum - 0.5;
-    //create an array
-    let arrayWithHalfStar = new Array(numNoDecimal);
-    console.log(arrayWithHalfStar);
-    return arrayWithHalfStar;
-  }
-
-  return <div>hello</div>;
-};
-
-export default StarHandler;
+export default function StarHandler({ stars }) {
+  return (
+    <div>
+      {stars == 0.5 ? (
+        <>
+          <IoStarHalf color="gold" />
+        </>
+      ) : stars == 1 ? (
+        <>
+          <IoStar color="gold" />
+        </>
+      ) : stars == 1.5 ? (
+        <>
+          <IoStar color="gold" /> <IoStarHalf color="gold" />
+        </>
+      ) : stars == 2 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />
+        </>
+      ) : stars == 2.5 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStarHalf color="gold" />
+        </>
+      ) : stars == 3 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" />
+        </>
+      ) : stars == 3.5 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" /> <IoStarHalf color="gold" />
+        </>
+      ) : stars == 4 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" /> <IoStar color="gold" />
+        </>
+      ) : stars == 4.5 ? (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStarHalf color="gold" />
+        </>
+      ) : (
+        <>
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" /> <IoStar color="gold" />{" "}
+          <IoStar color="gold" />
+        </>
+      )}
+    </div>
+  );
+}

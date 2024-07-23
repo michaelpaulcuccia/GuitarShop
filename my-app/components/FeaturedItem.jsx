@@ -68,7 +68,7 @@ export default function FeaturedItem() {
               {item.numberOfStrings} string{" "}
               {item.isBass === true ? "bass guitar" : "gutiar"}
             </p>
-            <StarHandler rating={item.stars} />
+            <StarHandler stars={item.stars} />
             <SlashPrice price={item.price} addOn={100} />
             <Price>{item.price}</Price>
             <Image
