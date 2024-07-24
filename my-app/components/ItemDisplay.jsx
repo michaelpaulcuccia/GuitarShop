@@ -5,7 +5,7 @@ import ItemHeadline from "./Text/ItemHeadline";
 import StarHandler from "./StarHandler";
 import Price from "./Text/Price";
 import SlashPrice from "./Text/SlashPrice";
-import AddToCartButton from "./AddToCartButton";
+import { mobileBreakpoint } from "../constants";
 
 const textShrink = "1330px";
 
@@ -18,12 +18,25 @@ const Root = styled.div`
 const FlexOne = styled.div`
   display: flex;
   align-items: flex-start;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    flex-direction: column;
+  }
 `;
 
-const ImageSide = styled.div``;
+const ImageSide = styled.div`
+  @media (max-width: ${mobileBreakpoint}) {
+    display: flex;
+    justify-content: center;
+  }
+`;
 
 const ContentSide = styled.div`
   margin-left: 30px;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    margin: 30px 12px 18px 12px;
+  }
 `;
 
 const ScriptContainer = styled.div`
@@ -56,6 +69,7 @@ export default function ItemDisplay({
     <Root>
       <FlexOne>
         <ImageSide>
+          {/* TODO: Create a show/hide Image for mobile responsive width */}
           <Image src={img[0]} alt="" width={486} height={394} />
         </ImageSide>
         <ContentSide>
@@ -71,7 +85,6 @@ export default function ItemDisplay({
           <Price>{price}</Price>
           <p>{numberAvailable} left in stock!</p>
           <ScriptContainer>{description}</ScriptContainer>
-          <AddToCartButton href="/" />
         </ContentSide>
       </FlexOne>
     </Root>
