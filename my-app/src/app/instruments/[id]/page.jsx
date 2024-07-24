@@ -1,17 +1,50 @@
-'use client';
-import React from 'react';
-import { usePathname } from 'next/navigation'
+"use client";
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 export default function page() {
+  const { id } = useParams();
+  const [instrument, setInstrument] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const pathname = usePathname();
-  let trimmedPathname;
+  useEffect(() => {
+    const getInstrumentData = async () => {
+      if (!id) return;
+      try {
+        const instrument = await fetchSingleItem(id);
+        setInstrument(instrument);
+      } catch (error) {
+        console.error("error fetching");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (pathname) {
-    trimmedPathname = pathname.replace(/^\/instruments\//, '');
+    if (instrument === null) {
+      getInstrumentData();
+    }
+  }, [id, instrument]);
+
+  async function fetchSingleItem(id) {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_DOMAIN}/instruments/${id}`
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      return res.json();
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
-  
-  return (
-    <div>welcome to instruments {trimmedPathname}</div>
-  )
+
+  if (!instrument && !loading) {
+    return <h1>Instrument Not Found</h1>;
+  }
+
+  return <>{!loading && instrument && <>{instrument.brand}</>}</>;
 }
