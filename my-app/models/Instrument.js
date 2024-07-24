@@ -26,6 +26,7 @@ const InstrumentSchema = new Schema(
     },
     numberOfStrings: {
       type: Number,
+      required: true,
     },
     stars: {
       type: Number,
@@ -38,6 +39,14 @@ const InstrumentSchema = new Schema(
     price: {
       type: Number,
       required: true,
+    },
+    addOn: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    addOnAmount: {
+      type: Number,
     },
     numberAvailable: {
       type: Number,

@@ -6,23 +6,37 @@ import ItemHeadline from "./Text/ItemHeadline";
 import SlashPrice from "./Text/SlashPrice";
 import Price from "./Text/Price";
 import StarHandler from "./StarHandler";
-import Financing from "./Text/Financing";
+import FinanceShipCustomerWarranty from "./Text/FinanceShipCustomerWarranty";
+import LearnMoreButton from "./LearnMoreButton";
+import { mobileBreakpoint } from "../constants";
 
 const ItemContainer = styled.div`
   display: flex;
   align-content: center;
   padding: 48px 32px;
-`;
 
-const TitlePriceImageContainer = styled.div`
-  display: inline-block;
+  @media (max-width: ${mobileBreakpoint}) {
+    flex-direction: column;
+  }
 `;
 
 const DescriptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-right: 150px;
+  width: 60%;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    width: 100%;
+    margin-bottom: 18px;
+  }
+`;
+
+const TitlePriceImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export default function FeaturedItem() {
@@ -80,11 +94,11 @@ export default function FeaturedItem() {
           rock for years to come.
         </p>
         <br />
-        <Financing price={data[0].price} />
+        <FinanceShipCustomerWarranty price={data[0].price} />
       </DescriptionContainer>
-      <TitlePriceImageContainer>
+      <div>
         {data.map((item, i) => (
-          <div key={i}>
+          <TitlePriceImageContainer key={i}>
             <ItemHeadline>
               {item.brand} {item.modelType}
             </ItemHeadline>
@@ -93,17 +107,21 @@ export default function FeaturedItem() {
               {item.isBass === true ? "bass guitar" : "gutiar"}
             </p>
             <StarHandler stars={item.stars} />
-            <SlashPrice price={item.price} addOn={100} />
+            {item.addOn && (
+              <SlashPrice price={item.price} addOn={item.addOnAmount} />
+            )}
             <Price>{item.price}</Price>
             <Image
               src={`${item.images}`}
               alt={`${item.brand}`}
               width={486}
               height={394}
+              style={{ marginTop: "12px" }}
             />
-          </div>
+            <LearnMoreButton href="/" />
+          </TitlePriceImageContainer>
         ))}
-      </TitlePriceImageContainer>
+      </div>
     </ItemContainer>
   );
 }
