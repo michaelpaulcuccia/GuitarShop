@@ -29,7 +29,6 @@ export default function Financing({ price }) {
   const financingPayments = (arg) => {
     let priceDivBy48 = arg / 48;
     let rounded = Math.ceil(priceDivBy48);
-    console.log(rounded);
     return rounded;
   };
 

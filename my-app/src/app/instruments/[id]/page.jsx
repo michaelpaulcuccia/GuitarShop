@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import ItemDisplay from "../../../../components/ItemDisplay";
 
 export default function page() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ export default function page() {
     }
   }, [id, instrument]);
 
+  //TODO: move to a separate directory
   async function fetchSingleItem(id) {
     try {
       const res = await fetch(
@@ -46,5 +48,23 @@ export default function page() {
     return <h1>Instrument Not Found</h1>;
   }
 
-  return <>{!loading && instrument && <>{instrument.brand}</>}</>;
+  return (
+    <>
+      {!loading && instrument && (
+        <ItemDisplay
+          img={instrument.images}
+          brand={instrument.brand}
+          modelType={instrument.modelType}
+          numberOfStrings={instrument.numberOfStrings}
+          isBass={instrument.isBass}
+          stars={instrument.stars}
+          addOn={instrument.addOn}
+          price={instrument.price}
+          addOnAmount={instrument.addOnAmount}
+          description={instrument.description}
+          numberAvailable={instrument.numberAvailable}
+        />
+      )}
+    </>
+  );
 }

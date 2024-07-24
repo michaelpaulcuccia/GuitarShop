@@ -118,7 +118,7 @@ export default function FeaturedItem() {
               height={394}
               style={{ marginTop: "12px" }}
             />
-            <LearnMoreButton href="/" />
+            <LearnMoreButton href={item._id} />
           </TitlePriceImageContainer>
         ))}
       </div>

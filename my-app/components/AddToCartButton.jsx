@@ -1,32 +1,30 @@
 import React from "react";
-import Link from "next/link";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Root = styled(Link)`
   text-decoration: none;
   text-align: center;
-  background: #3b7d1a;
+  background: #4a90e2;
   color: white;
   padding: 8px 25px;
-  margin-top: 18px;
   width: 50%;
   border-radius: 50px;
   transition: background 0.3s ease;
 
   &:hover {
-    background: #316816;
+    background: #357abd;
   }
 `;
 
-export default function LearnMoreButton({ href, target, className }) {
-  console.log(href);
+export default function AddToCartButton({ href, target, className }) {
   return (
-    <Root href={`/instruments/${href}`} className={className} target={target}>
-      Learn More
+    <Root href={href} className={className} target={target}>
+      Add To Cart
     </Root>
   );
 }
 
-LearnMoreButton.defaultProps = {
+AddToCartButton.defaultProps = {
   target: "_self",
 };
