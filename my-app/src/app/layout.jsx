@@ -7,7 +7,8 @@ import NavBar from "../../components/NavBar";
 export const metadata = {
   title: "TREMELO | Guitars For Sale",
   description: "Find new and used guitars",
-  keywords: 'guitar, electric guitar, acoustic guitar, acoustic, bass, bass guitar'
+  keywords:
+    "guitar, electric guitar, acoustic guitar, acoustic, bass, bass guitar",
 };
 
 const nunito = Nunito({ subsets: ["latin"] });
@@ -17,10 +18,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={nunito.className}>
         <StyledComponentsRegistry>
-            <NavBar />
-            <Container>
-              <main>{children}</main>
-            </Container>
+          <NavBar />
+          <Container>
+            <main>{children}</main>
+          </Container>
         </StyledComponentsRegistry>
       </body>
     </html>

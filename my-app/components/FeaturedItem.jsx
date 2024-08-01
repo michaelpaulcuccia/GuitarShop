@@ -18,6 +18,20 @@ const ItemContainer = styled.div`
   @media (max-width: ${mobileBreakpoint}) {
     flex-direction: column;
   }
+
+  .desktop-image {
+    display: block;
+    @media (max-width: ${mobileBreakpoint}) {
+      display: none;
+    }
+  }
+
+  .mobile-image {
+    display: none;
+    @media (max-width: ${mobileBreakpoint}) {
+      display: block;
+    }
+  }
 `;
 
 const DescriptionContainer = styled.div`
@@ -36,7 +50,6 @@ const TitlePriceImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
 `;
 
 export default function FeaturedItem() {
@@ -113,13 +126,24 @@ export default function FeaturedItem() {
               <SlashPrice price={item.price} addOn={item.addOnAmount} />
             )}
             <Price>{item.price}</Price>
-            <Image
-              src={`${item.images}`}
-              alt={`${item.brand}`}
-              width={486}
-              height={394}
-              style={{ marginTop: "12px" }}
-            />
+            <div className="desktop-image">
+              <Image
+                src={`${item.images}`}
+                alt={`${item.brand}`}
+                width={486}
+                height={394}
+                style={{ marginTop: "12px" }}
+              />
+            </div>
+            <div className="mobile-image">
+              <Image
+                src={`${item.images}`}
+                alt={`${item.brand}`}
+                width={263} //273
+                height={224} //197
+                style={{ marginBottom: "8px" }}
+              />
+            </div>
             <LearnMoreButton href={item._id} />
           </TitlePriceImageContainer>
         ))}

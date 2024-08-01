@@ -13,6 +13,20 @@ const Root = styled.div`
   background: black;
   color: white;
   padding: 48px 36px 30px 36px;
+
+  .desktop-image {
+    display: block;
+    @media (max-width: ${mobileBreakpoint}) {
+      display: none;
+    }
+  }
+
+  .mobile-image {
+    display: none;
+    @media (max-width: ${mobileBreakpoint}) {
+      display: flex;-
+    }
+  }
 `;
 
 const FlexOne = styled.div`
@@ -21,6 +35,7 @@ const FlexOne = styled.div`
 
   @media (max-width: ${mobileBreakpoint}) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -69,8 +84,24 @@ export default function ItemDisplay({
     <Root>
       <FlexOne>
         <ImageSide>
-          {/* TODO: Create a show/hide Image for mobile responsive width */}
-          <Image src={img[0]} alt="" width={486} height={394} />
+          <div className="desktop-image">
+            <Image
+              src={img[0]}
+              alt={`${brand}`}
+              width={486}
+              height={394}
+              style={{ marginTop: "12px" }}
+            />
+          </div>
+          <div className="mobile-image">
+            <Image
+              src={img[0]}
+              alt={`${brand}`}
+              width={263} //273
+              height={224} //197
+              style={{ marginBottom: "8px" }}
+            />
+          </div>
         </ImageSide>
         <ContentSide>
           <ItemHeadline>
