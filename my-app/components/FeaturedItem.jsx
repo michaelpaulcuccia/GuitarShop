@@ -54,9 +54,9 @@ export default function FeaturedItem() {
           throw new Error("failed to get data");
         }
         const result = await response.json();
-        //gets one item using hardcoded ID, TODO: set up "isFeaturedItem" in database
-        const hardCodedId = "66a120c6361d152c92b3542b";
-        const item = result.filter((id) => id._id == hardCodedId);
+
+        //FIND item with is_featured
+        const item = result.filter((item) => item.is_featured == true);
         setData(item);
       } catch (error) {
         console.log(error);
