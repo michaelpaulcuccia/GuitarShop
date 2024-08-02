@@ -4,7 +4,6 @@ import styled from "styled-components";
 import StarHandler from "./StarHandler";
 import SlashPrice from "./Text/SlashPrice";
 import Price from "./Text/Price";
-import LearnMoreButton from "./LearnMoreButton";
 import { mobileBreakpoint } from "../constants";
 
 const Root = styled.div`
@@ -15,7 +14,6 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //margin-bottom: 24px;
   height: 548px;
 
   @media (max-width: ${mobileBreakpoint}) {
@@ -68,7 +66,6 @@ export default function Item({
         height={224} //197
         style={{ marginBottom: "8px" }}
       />
-      <LearnMoreButton href={_id} />
     </Root>
   );
 }
