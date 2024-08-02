@@ -15,53 +15,8 @@ const Root = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
-
-  //HOVER START
-  position: relative;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(211, 211, 211, 0.7); /* Light gray with opacity */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1; /* Ensure the overlay appears above the content */
-    pointer-events: none; /* Prevent interaction issues */
-  }
-
-  &:hover::before {
-    opacity: 1; /* Show the overlay on hover */
-  }
-
-  * {
-    position: relative;
-    z-index: 1000; /* Ensure content is above the overlay */
-  }
-  //HOVER END
-
-  .hidden {
-    display: none;
-  }
-  &:hover {
-    .hidden {
-      display: flex;
-      flex-direction: column;
-      justifty-content: center;
-      align-items: center;
-      align-content: center;
-      position: absolute;
-      top: 205px;
-      padding: 12px;
-      background: rgba(211, 211, 211, 0.7);
-      height: 224px;
-      width: 100%;
-    }
-  }
+  //margin-bottom: 24px;
+  height: 548px;
 
   @media (max-width: ${mobileBreakpoint}) {
     margin-bottom: 12px;
@@ -106,7 +61,6 @@ export default function Item({
         </>
       )}
       <Price>{price}</Price>
-
       <Image
         src={`${images}`}
         alt={`${brand}`}
@@ -115,7 +69,6 @@ export default function Item({
         style={{ marginBottom: "8px" }}
       />
       <LearnMoreButton href={_id} />
-      <div className="hidden">Learn More</div>
     </Root>
   );
 }
