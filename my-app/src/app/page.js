@@ -1,20 +1,53 @@
 "use client";
 import React from "react";
 import styled from "styled-components";
-import FeaturedItem from "../../components/FeaturedItem";
+import Hero from "../../components/Hero";
 import OtherItemsContainer from "../../components/OtherItemsContainer";
-import NewOtherItemsContainer from "../../components/NewOtherItemsContainer";
+import { mobileBreakpoint } from "../../constants";
 
-const Root = styled.div``;
+const HeroContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    flex-direction: column;
+  }
+`;
+
+const BassHero = {
+  headline: "Bass Sale!",
+  subText: "Get these limited time savings",
+  instrumentType: "bass",
+  image: "/images/bass_hero.jpg",
+};
+
+const GuitarHero = {
+  headline: "New Items!",
+  subText: "Check out our new stock",
+  instrumentType: "guitar",
+  image: "/images/guitar_hero.jpg",
+};
 
 const Home = () => {
   return (
-    <Root>
-      <h1>Our featured item</h1>
-      <FeaturedItem />
+    <>
+      <HeroContainer>
+        <Hero
+          headline={BassHero.headline}
+          subText={BassHero.subText}
+          instrumentType={BassHero.instrumentType}
+          image={BassHero.image}
+        />
+        <Hero
+          headline={GuitarHero.headline}
+          subText={GuitarHero.subText}
+          instrumentType={GuitarHero.instrumentType}
+          image={GuitarHero.image}
+        />
+      </HeroContainer>
+
       <OtherItemsContainer />
-      <NewOtherItemsContainer />
-    </Root>
+    </>
   );
 };
 

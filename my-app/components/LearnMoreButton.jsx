@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Root = styled(Link)`
   text-decoration: none;
   text-align: center;
-  background: #3b7d1a;
+  background: gray;
   color: white;
   padding: 8px 25px;
   margin-top: 18px;
@@ -14,7 +14,8 @@ const Root = styled(Link)`
   transition: background 0.3s ease;
 
   &:hover {
-    background: #316816;
+    background-color: hsl(0, 0%, 33%); /* Light gray */
+    transition: background-color 0.3s ease; /* Smooth transition */
   }
 `;
 

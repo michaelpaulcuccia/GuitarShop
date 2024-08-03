@@ -2,70 +2,110 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import StarHandler from "./StarHandler";
-import SlashPrice from "./Text/SlashPrice";
-import Price from "./Text/Price";
+import LearnMoreButton from "./LearnMoreButton";
 import { mobileBreakpoint } from "../constants";
 
 const Root = styled.div`
-  border: 1px solid #eee;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
-  padding: 24px 0px 18px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 548px;
-
-  @media (max-width: ${mobileBreakpoint}) {
-    margin-bottom: 12px;
-  }
+  padding: 10px;
+  width: 25%;
+  margin: 12px 16.5px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
 
   .title_container {
-    text-align: center;
-    max-width: 215px;
+    margin: 12px 0;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
   }
 
-  .strings_container {
-    margin-bottom: 8px;
+  @media (max-width: ${mobileBreakpoint}) {
+    width: 90%;
+  }
+`;
+
+const Overlay = styled.div`
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(235, 235, 235, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1; /
+    pointer-events: none; 
+  }
+
+  &:hover::before {
+    opacity: 1; /* Show the overlay on hover */
+  }
+
+  * {
+    position: relative;
+  }
+
+  .learn-more-container {
+    display: none;
+  }
+
+  &:hover {
+    .learn-more-container {
+      display: flex;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 75%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
   }
 `;
 
 export default function Item({
   brand,
   modelType,
-  numberOfStrings,
-  isBass,
   stars,
-  addOn,
-  price,
-  addOnAmount,
   images,
   _id,
-  className,
+  //className,
 }) {
   return (
-    <Root className={className}>
-      <div className="title_container">
-        {brand} {modelType}
-      </div>
-      <p className="strings_container">
-        {numberOfStrings} string {isBass === true ? "bass guitar" : "gutiar"}
-      </p>
-      <StarHandler stars={stars} />
-      {addOn && (
+    <Root>
+      <Overlay>
         <>
-          <br />
-          <SlashPrice price={price} addOn={addOnAmount} />
+          <div className="title_container">
+            {brand} {modelType}
+          </div>
+          <StarHandler stars={stars} />
+          {/* {addOn && (
+            <>
+              <br />
+              <SlashPrice price={price} addOn={addOnAmount} />
+            </>
+          )}
+          <Price>{price}</Price> */}
+          <div className="learn-more-container">
+            <LearnMoreButton href={_id} />
+          </div>
+          <Image
+            src={`${images}`}
+            alt={`${brand}`}
+            width={263} //273
+            height={224} //197
+            style={{ marginTop: "12px" }}
+          />
         </>
-      )}
-      <Price>{price}</Price>
-      <Image
-        src={`${images}`}
-        alt={`${brand}`}
-        width={263} //273
-        height={224} //197
-        style={{ marginBottom: "8px" }}
-      />
+      </Overlay>
     </Root>
   );
 }

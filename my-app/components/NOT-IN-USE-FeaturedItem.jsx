@@ -3,14 +3,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import ItemHeadline from "./Text/ItemHeadline";
-import SlashPrice from "./Text/SlashPrice";
-import Price from "./Text/Price";
-import StarHandler from "./StarHandler";
+
 import FinanceShipCustomerWarranty from "./Text/FinanceShipCustomerWarranty";
-import LearnMoreButton from "./LearnMoreButton";
 import { mobileBreakpoint } from "../constants";
 
-const ItemContainer = styled.div`
+const Root = styled.div`
   display: flex;
   align-content: center;
   padding: 48px 32px;
@@ -34,22 +31,27 @@ const ItemContainer = styled.div`
   }
 `;
 
-const DescriptionContainer = styled.div`
+const MainText = styled.div`
+  width: 40%;
+  padding-right: 24px;
+
+  p {
+    font-size: 22px;
+    line-height: 22px;
+  }
+`;
+
+const OptionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 60%;
+  padding-left: 24px;
+  width: 30%;
 
   @media (max-width: ${mobileBreakpoint}) {
     width: 100%;
     margin-bottom: 18px;
   }
-`;
-
-const TitlePriceImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export default function FeaturedItem() {
@@ -91,10 +93,11 @@ export default function FeaturedItem() {
   }
 
   return (
-    <ItemContainer>
-      <DescriptionContainer>
+    <Root>
+      <MainText>
         <ItemHeadline>
-          Rock Your World with the Ultimate Bass Guitar Sale! 🎸
+          <span>Rock Your World </span> <br />
+          with the Ultimate Bass Guitar Sale! 🎸
         </ItemHeadline>
         <br />
         <p>
@@ -109,9 +112,22 @@ export default function FeaturedItem() {
           rock for years to come.
         </p>
         <br />
-        <FinanceShipCustomerWarranty price={data[0].price} />
-      </DescriptionContainer>
+      </MainText>
       <div>
+        <div className="desktop-image">
+          <Image
+            src={`${data[0].images[0]}`}
+            alt={`${data[0].brand}`}
+            width={426}
+            height={334}
+            style={{ marginTop: "12px" }}
+          />
+        </div>
+      </div>
+      <OptionsContainer>
+        <FinanceShipCustomerWarranty price={data[0].price} />
+      </OptionsContainer>
+      {/* <div>
         {data.map((item, i) => (
           <TitlePriceImageContainer key={i}>
             <ItemHeadline>
@@ -147,7 +163,7 @@ export default function FeaturedItem() {
             <LearnMoreButton href={item._id} />
           </TitlePriceImageContainer>
         ))}
-      </div>
-    </ItemContainer>
+      </div> */}
+    </Root>
   );
 }
