@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobileBreakpoint } from "../../constants";
 
 const Root = styled.div`
   display: flex;
@@ -10,12 +11,24 @@ const Root = styled.div`
     font-weight: 600;
     font-size: 48px;
     line-height: 48px;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      font-size: 36px;
+      line-height: 36px;
+      text-align: center;
+    }
   }
 
   h3 {
     font-weight: 400;
     font-size: 36px;
     line-height: 36px;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      font-size: 28px;
+      line-height: 28px;
+      text-align: center;
+    }
   }
 `;
 
