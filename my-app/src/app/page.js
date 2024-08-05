@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Hero from "../../components/Hero";
 import OtherItemsContainer from "../../components/OtherItemsContainer";
 import { mobileBreakpoint } from "../../constants";
+import SaleBar from "../../components/SaleBar";
 
 const HeroContainer = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const Home = () => {
           image={GuitarHero.image}
         />
       </HeroContainer>
-
+      <SaleBar />
       <OtherItemsContainer />
     </>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { mobileBreakpoint } from "../constants";
+import ItemHeadline from "./Text/ItemHeadline";
 
 const Root = styled.div`
   position: relative;
@@ -30,7 +31,7 @@ const Root = styled.div`
   }
 
   @media (max-width: ${mobileBreakpoint}) {
-    width: 95%;
+    width: 100%;
   }
 
   .heroImage {
@@ -44,10 +45,8 @@ const Root = styled.div`
 
 const MainTextContainer = styled.div`
   position: relative;
-  color: black; /* Text color */
   text-align: center;
   z-index: 1;
-  border: 1px solid black;
   margin-top: 20px;
 `;
 
@@ -55,8 +54,8 @@ export default function Hero({ headline, subText, instrumentType, image }) {
   return (
     <Root>
       <MainTextContainer>
-        <div>{headline}</div>
-        <div>{subText}</div>
+        <ItemHeadline>{headline}</ItemHeadline>
+        <p style={{ fontWeight: "400" }}>{subText}</p>
       </MainTextContainer>
       <div className="desktop">
         <Image
