@@ -89,13 +89,18 @@ const MobileMenuButtonContainer = styled.div`
 
 const MobileNavContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  width: 90%;
 `;
 
 const OpenMobileNavContainer = styled(MobileNavContainer)`
   animation: ${fadeIn} 0.5s ease;
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const MobileTitleHide = styled.div`
@@ -126,8 +131,9 @@ export default function NavBar() {
             >
               Tremelo
             </NavLinks>
-            <NavLinks href="/instruments">Instruments</NavLinks>
-            <NavLinks href="/">Add Instruments</NavLinks>
+            <NavLinks href="/instruments">View All Instruments</NavLinks>
+            <NavLinks href="/">Bass Guitars</NavLinks>
+            <NavLinks href="/">Electric Guitars</NavLinks>
           </LeftSideLinks>
           <RightSideUser>
             <NavLinks href="/">Login or Register</NavLinks>
@@ -159,7 +165,7 @@ export default function NavBar() {
               </MobileTitleHide>
             )}
             <MobileMenuButtonContainer onClick={handleMobileNav}>
-              <CiMenuBurger />
+              {!mobileNavOpen && <CiMenuBurger style={{ fontSize: "22px" }} />}
             </MobileMenuButtonContainer>
             {mobileNavOpen && (
               <OpenMobileNavContainer onClick={handleOpenMobileClick}>
@@ -170,8 +176,9 @@ export default function NavBar() {
                 >
                   Tremelo
                 </NavLinks>
-                <NavLinks href="/instruments">Instruments</NavLinks>
-                <NavLinks href="/">Add Instruments</NavLinks>
+                <NavLinks href="/instruments">View All Instruments</NavLinks>
+                <NavLinks href="/">Bass Guitars</NavLinks>
+                <NavLinks href="/">Electric Guitars</NavLinks>
                 <NavLinks href="/">Login or Register</NavLinks>
                 <IconContainer>
                   <div>
