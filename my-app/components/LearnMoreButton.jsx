@@ -20,7 +20,6 @@ const Root = styled(Link)`
 `;
 
 export default function LearnMoreButton({ href, target, className }) {
-  console.log(href);
   return (
     <Root href={`/instruments/${href}`} className={className} target={target}>
       Learn More

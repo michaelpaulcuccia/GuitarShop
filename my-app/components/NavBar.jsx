@@ -108,6 +108,11 @@ export default function NavBar() {
     setMobileNavOpen(!mobileNavOpen);
   };
 
+  const handleOpenMobileClick = () => {
+    console.log("click");
+    setMobileNavOpen(!mobileNavOpen);
+  };
+
   return (
     <Root>
       <Line />
@@ -157,7 +162,7 @@ export default function NavBar() {
               <CiMenuBurger />
             </MobileMenuButtonContainer>
             {mobileNavOpen && (
-              <OpenMobileNavContainer>
+              <OpenMobileNavContainer onClick={handleOpenMobileClick}>
                 <NavLinks
                   href="/"
                   className={dancing_script.className}
