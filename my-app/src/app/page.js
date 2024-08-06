@@ -6,6 +6,15 @@ import OtherItemsContainer from "../../components/OtherItemsContainer";
 import { mobileBreakpoint } from "../../constants";
 import SaleBar from "../../components/SaleBar";
 
+const HeroTextContainer = styled.div`
+  margin: 36px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: 0.75px;
+`;
+
 const HeroContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -32,6 +41,9 @@ const GuitarHero = {
 const Home = () => {
   return (
     <>
+      <HeroTextContainer>
+        🎸 Get Your Next Guitar Right Here! 🎵
+      </HeroTextContainer>
       <HeroContainer>
         <Hero
           headline={BassHero.headline}
