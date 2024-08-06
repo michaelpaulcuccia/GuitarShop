@@ -18,6 +18,6 @@ const Root = styled.p`
   }
 `;
 
-export default function ItemHeadline({ children }) {
-  return <Root>{children}</Root>;
+export default function ItemHeadline({ children, className }) {
+  return <Root className={className}>{children}</Root>;
 }

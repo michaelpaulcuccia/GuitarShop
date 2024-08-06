@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 import { mobileBreakpoint } from "../constants";
 import ItemHeadline from "./Text/ItemHeadline";
@@ -48,35 +49,47 @@ const MainTextContainer = styled.div`
   text-align: center;
   z-index: 1;
   margin-top: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: hsl(0, 0%, 33%); /* Light gray */
+    transition: color 0.3s ease; /* Smooth transition */
+    font-weight: 900;
+  }
 `;
 
 export default function Hero({ headline, subText, instrumentType, image }) {
   return (
     <Root>
-      <MainTextContainer>
-        <ItemHeadline>{headline}</ItemHeadline>
-        <p style={{ fontWeight: "400" }}>{subText}</p>
-      </MainTextContainer>
-      <div className="desktop">
-        <Image
-          src={image}
-          alt="Background Image"
-          width="325"
-          height="325"
-          layout="intrinsic"
-          className="heroImage"
-        />
-      </div>
-      <div className="mobile">
-        <Image
-          src={image}
-          alt="Background Image"
-          width="275"
-          height="275"
-          layout="intrinsic"
-          className="heroImage"
-        />
-      </div>
+      <Link
+        style={{ textDecoration: "none", color: "inherit" }}
+        href={`/instruments/` + instrumentType}
+      >
+        <MainTextContainer>
+          <ItemHeadline>{headline}</ItemHeadline>
+          <p style={{ fontWeight: "400" }}>{subText}</p>
+        </MainTextContainer>
+        <div className="desktop">
+          <Image
+            src={image}
+            alt="Background Image"
+            width="325"
+            height="325"
+            layout="intrinsic"
+            className="heroImage"
+          />
+        </div>
+        <div className="mobile">
+          <Image
+            src={image}
+            alt="Background Image"
+            width="275"
+            height="275"
+            layout="intrinsic"
+            className="heroImage"
+          />
+        </div>
+      </Link>
     </Root>
   );
 }
