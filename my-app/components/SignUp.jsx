@@ -2,9 +2,7 @@
 import React, { useState, useContext } from "react";
 //import { useRouter } from 'next/navigation';
 import UserContext from "../context/UserContext";
-import User from "../models/User";
-import connectDB from "../config/database";
-import styled from "styled-components";
+//import User from "../models/User";
 
 export default function SignUp() {
   const { setContextUser } = useContext(UserContext);
@@ -16,23 +14,22 @@ export default function SignUp() {
   const [inputPass, setInputPass] = useState("");
 
   async function signUpUser() {
-    try {
-      await connectDB();
-      const userAlreadyExists = await User.findOne({ email: inputUserEmail });
-      if (!userAlreadyExists) {
-        await User.create({
-          username: inputUserName,
-          email: inputUserEmail,
-          password: inputPass,
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      //clears form
-      setInputUserName("");
-      setInputUserEmail("");
-      setInputPass("");
+    console.log("signUpUser function called");
+
+    //get all users from API
+    const allUsers = await fetch(
+      process.env.NEXT_PUBLIC_API_DOMAIN + "/users/"
+    );
+    const result = await allUsers.json();
+    const checkForExistingUser = result.filter(
+      (item) => item.email === inputUserEmail
+    );
+
+    if (checkForExistingUser) {
+      console.log("email exists");
+    } else {
+      try {
+      } catch (error) {}
     }
   }
 
@@ -40,12 +37,16 @@ export default function SignUp() {
     event.preventDefault();
     setContextUser({ inputUserName, inputUserEmail, inputPass });
     signUpUser();
-
+    //clears form
+    setInputUserName("");
+    setInputUserEmail("");
+    setInputPass("");
     //router.push(`/users/${inputUserName}`);
   };
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} action="/api/users" method="POST">
         <div>
           <label htmlFor="inputUserName">User Name</label>
           <input
