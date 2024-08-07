@@ -1,65 +1,63 @@
 "use client";
 import React, { useState, useContext } from "react";
-//import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import UserContext from "../context/UserContext";
-//import User from "../models/User";
+import styled from "styled-components";
+
+const Root = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ItemContainer = styled.div`
+  margin: 6px;
+  display; flex;
+  
+  label {
+    margin-right: 12px;
+  }
+`;
 
 export default function SignUp() {
   const { setContextUser } = useContext(UserContext);
 
-  //const router = useRouter();
+  const router = useRouter();
 
   const [inputUserName, setInputUserName] = useState("");
   const [inputUserEmail, setInputUserEmail] = useState("");
   const [inputPass, setInputPass] = useState("");
 
-  async function signUpUser() {
-    console.log("signUpUser function called");
-
-    //get all users from API
-    const allUsers = await fetch(
-      process.env.NEXT_PUBLIC_API_DOMAIN + "/users/"
-    );
-    const result = await allUsers.json();
-    const checkForExistingUser = result.filter(
-      (item) => item.email === inputUserEmail
-    );
-
-    if (checkForExistingUser) {
-      console.log("email exists");
-    } else {
-      try {
-      } catch (error) {}
-    }
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setContextUser({ inputUserName, inputUserEmail, inputPass });
-    signUpUser();
-    //clears form
+    //clear form
     setInputUserName("");
     setInputUserEmail("");
     setInputPass("");
-    //router.push(`/users/${inputUserName}`);
+    router.push("/");
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} action="/api/users" method="POST">
-        <div>
+      <Root onSubmit={handleSubmit} action="/api/users" method="POST">
+        <ItemContainer>
           <label htmlFor="inputUserName">User Name</label>
           <input
             type="text"
             value={inputUserName}
             onChange={(event) => setInputUserName(event.target.value)}
           />
+        </ItemContainer>
+        <ItemContainer>
           <label htmlFor="inputUserEmail">User Email</label>
           <input
             type="email"
             value={inputUserEmail}
             onChange={(event) => setInputUserEmail(event.target.value)}
           />
+        </ItemContainer>
+        <ItemContainer>
           <label htmlFor="inputPass">Password (must be 8 characters)</label>
           <input
             type="password"
@@ -68,9 +66,9 @@ export default function SignUp() {
             value={inputPass}
             onChange={(event) => setInputPass(event.target.value)}
           />
-        </div>
+        </ItemContainer>
         <input type="submit" value="Sign Up" />
-      </form>
+      </Root>
     </>
   );
 }
