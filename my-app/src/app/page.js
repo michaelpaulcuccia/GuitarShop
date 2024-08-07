@@ -13,6 +13,12 @@ const HeroTextContainer = styled.div`
   font-size: 48px;
   line-height: 48px;
   letter-spacing: 0.75px;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    text-align: center;
+    font-size: 36px;
+    line-height: 36px;
+  }
 `;
 
 const HeroContainer = styled.div`
@@ -26,14 +32,14 @@ const HeroContainer = styled.div`
 
 const BassHero = {
   headline: "Bass Sale!",
-  subText: "Get these limited time savings",
+  subText: "Get these limited time savings TODO:pill button wrap with caret",
   instrumentType: "bass",
   image: "/images/bass_hero.jpg",
 };
 
 const GuitarHero = {
   headline: "New Items!",
-  subText: "Check out our new stock",
+  subText: "Check out our new stock TODO:pill button wrap with caret",
   instrumentType: "guitar",
   image: "/images/guitar_hero.jpg",
 };

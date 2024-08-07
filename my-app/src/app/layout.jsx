@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Nunito } from "next/font/google";
 import StyledComponentsRegistry from "@/lib/registry";
+import { UserContextProvider } from "../../context/UserContext";
 import Container from "../../components/Container";
 import NavBar from "../../components/NavBar";
 
@@ -18,10 +19,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={nunito.className}>
         <StyledComponentsRegistry>
-          <NavBar />
-          <Container>
-            <main>{children}</main>
-          </Container>
+          <UserContextProvider>
+            <NavBar />
+            <Container>
+              <main>{children}</main>
+            </Container>
+          </UserContextProvider>
         </StyledComponentsRegistry>
       </body>
     </html>
