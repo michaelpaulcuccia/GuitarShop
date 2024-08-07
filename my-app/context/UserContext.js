@@ -12,7 +12,11 @@ export const useUserContext = () => {
 };
 
 export const UserContextProvider = ({ children }) => {
-  const [contextUser, setContextUser] = useState({});
+  const [contextUser, setContextUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   console.log(contextUser);
 

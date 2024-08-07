@@ -30,7 +30,11 @@ export default function SignUp() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setContextUser({ inputUserName, inputUserEmail, inputPass });
+    setContextUser({
+      username: inputUserName,
+      email: inputUserEmail,
+      password: inputPass,
+    });
     //clear form
     setInputUserName("");
     setInputUserEmail("");

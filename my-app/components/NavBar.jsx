@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
+import UserContext from "../context/UserContext";
 import { Dancing_Script } from "next/font/google";
 import styled, { keyframes } from "styled-components";
 import Container from "./Container";
@@ -106,8 +107,11 @@ const OpenMobileNavContainer = styled(MobileNavContainer)`
 const MobileTitleHide = styled.div`
   padding-top: 8px;
 `;
+
 export default function NavBar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { contextUser } = useContext(UserContext);
+  console.log(contextUser);
 
   const handleMobileNav = () => {
     setMobileNavOpen(!mobileNavOpen);
@@ -136,7 +140,12 @@ export default function NavBar() {
             <NavLinks href="/">Electric Guitars</NavLinks>
           </LeftSideLinks>
           <RightSideUser>
-            <NavLinks href="/">Login or Register</NavLinks>
+            {contextUser ? (
+              <div>Welcome {contextUser.username}</div>
+            ) : (
+              <NavLinks href="/">Login or Register</NavLinks>
+            )}
+
             <IconContainer>
               <div>
                 <CiBellOn size="24px" />
