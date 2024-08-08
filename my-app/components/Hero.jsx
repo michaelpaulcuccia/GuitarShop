@@ -4,6 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { mobileBreakpoint } from "../constants";
 import ItemHeadline from "./Text/ItemHeadline";
+import { FaChevronRight } from "react-icons/fa6";
 
 const Root = styled.div`
   position: relative;
@@ -44,16 +45,28 @@ const Root = styled.div`
   }
 `;
 
+const StyledItemHeadline = styled(ItemHeadline)`
+  margin-top: 12px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+`;
+
 const MainTextContainer = styled.div`
   position: relative;
-  text-align: center;
   z-index: 1;
-  margin-top: 20px;
+  padding: 6px 12px;
+  border: 1px solid black;
+  border-radius: 24px;
+
   cursor: pointer;
 
   &:hover {
-    color: hsl(0, 0%, 33%); /* Light gray */
-    transition: color 0.3s ease; /* Smooth transition */
+    border: 1px solid hsl(0, 0%, 33%);
+    color: hsl(0, 0%, 33%);
+    transition: color border 0.3s ease; /* Smooth transition */
     font-weight: 900;
   }
 `;
@@ -61,13 +74,14 @@ const MainTextContainer = styled.div`
 export default function Hero({ headline, subText, instrumentType, image }) {
   return (
     <Root>
-      <Link
-        style={{ textDecoration: "none", color: "inherit" }}
-        href={`/instruments/` + instrumentType}
-      >
+      <StyledItemHeadline>{headline}</StyledItemHeadline>
+      <StyledLink href={`/instruments/` + instrumentType}>
         <MainTextContainer>
-          <ItemHeadline>{headline}</ItemHeadline>
-          <p style={{ fontWeight: "400" }}>{subText}</p>
+          <p style={{ fontWeight: "400" }}>
+            {subText}
+            {""}
+            <FaChevronRight fontSize={10} style={{ marginLeft: "4px" }} />
+          </p>
         </MainTextContainer>
         <div className="desktop">
           <Image
@@ -89,7 +103,7 @@ export default function Hero({ headline, subText, instrumentType, image }) {
             className="heroImage"
           />
         </div>
-      </Link>
+      </StyledLink>
     </Root>
   );
 }

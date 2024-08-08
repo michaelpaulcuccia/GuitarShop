@@ -152,7 +152,7 @@ export default function NavBar() {
                 <div onClick={handleLogout}>Logout</div>
               </>
             ) : (
-              <NavLinks href="/">Login or Register</NavLinks>
+              <NavLinks href="/profile/login">Login or Register</NavLinks>
             )}
 
             <IconContainer>

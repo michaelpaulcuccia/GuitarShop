@@ -32,14 +32,14 @@ const HeroContainer = styled.div`
 
 const BassHero = {
   headline: "Bass Sale!",
-  subText: "Get these limited time savings TODO:pill button wrap with caret",
+  subText: "Get these limited time savings",
   instrumentType: "bass",
   image: "/images/bass_hero.jpg",
 };
 
 const GuitarHero = {
   headline: "New Items!",
-  subText: "Check out our new stock TODO:pill button wrap with caret",
+  subText: "Check out our new stock",
   instrumentType: "guitar",
   image: "/images/guitar_hero.jpg",
 };
@@ -47,9 +47,7 @@ const GuitarHero = {
 const Home = () => {
   return (
     <>
-      <HeroTextContainer>
-        🎸 Get Your Next Guitar Right Here! 🎵
-      </HeroTextContainer>
+      <HeroTextContainer>Find Your Next Guitar Right Here!</HeroTextContainer>
       <HeroContainer>
         <Hero
           headline={BassHero.headline}
