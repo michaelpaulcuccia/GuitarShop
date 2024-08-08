@@ -110,7 +110,6 @@ const MobileNavContainer = styled.div`
 const OpenMobileNavContainer = styled(MobileNavContainer)`
   animation: ${fadeIn} 0.5s ease;
   height: 100vh;
-  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
