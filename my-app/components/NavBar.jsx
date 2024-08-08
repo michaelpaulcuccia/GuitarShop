@@ -66,11 +66,23 @@ const RightSideUser = styled.div`
   padding-right: 12px;
 `;
 
+const UserContainer = styled.div`
+  margin-right: 6px;
+`;
+
 const IconContainer = styled.div`
   display: flex;
+  margin-right: 6px;
 
   @media (max-width: ${mobileBreakpoint}) {
     padding: 8px 0;
+  }
+`;
+
+const LogoutContainer = styled.div`
+  cursor: pointer;
+  &:hover {
+    font-weight: bold;
   }
 `;
 
@@ -79,7 +91,7 @@ const MainWrapperMobile = styled.div`
 
   @media (max-width: ${mobileBreakpoint}) {
     display: flex;
-    justify-content: center;
+    margin: 0 8px;
   }
 `;
 
@@ -142,28 +154,29 @@ export default function NavBar() {
               Tremelo
             </NavLinks>
             <NavLinks href="/instruments">View All Instruments</NavLinks>
-            <NavLinks href="/">Bass Guitars</NavLinks>
-            <NavLinks href="/">Electric Guitars</NavLinks>
+            <NavLinks href="/instruments/bass">Bass Guitars</NavLinks>
+            <NavLinks href="/instruments/guitar">Electric Guitars</NavLinks>
           </LeftSideLinks>
-          <RightSideUser>
-            {contextUser.username !== "" ? (
-              <>
-                <div>Welcome {contextUser.username}</div>
-                <div onClick={handleLogout}>Logout</div>
-              </>
-            ) : (
+          {/* <RightSideUser> */}
+          {contextUser.username !== "" ? (
+            <RightSideUser>
+              <UserContainer>Welcome {contextUser.username}</UserContainer>
+              <IconContainer>
+                <div>
+                  <CiBellOn size="24px" />
+                </div>
+                <div>
+                  <CiUser size="24px" />
+                </div>
+              </IconContainer>
+              <LogoutContainer onClick={handleLogout}>Logout</LogoutContainer>
+            </RightSideUser>
+          ) : (
+            <RightSideUser>
               <NavLinks href="/profile/login">Login or Register</NavLinks>
-            )}
-
-            <IconContainer>
-              <div>
-                <CiBellOn size="24px" />
-              </div>
-              <div>
-                <CiUser size="24px" />
-              </div>
-            </IconContainer>
-          </RightSideUser>
+            </RightSideUser>
+          )}
+          {/* </RightSideUser> */}
         </MainWrapperDesktop>
       </Container>
       <Line />
@@ -195,17 +208,29 @@ export default function NavBar() {
                   Tremelo
                 </NavLinks>
                 <NavLinks href="/instruments">View All Instruments</NavLinks>
-                <NavLinks href="/">Bass Guitars</NavLinks>
-                <NavLinks href="/">Electric Guitars</NavLinks>
-                <NavLinks href="/">Login or Register</NavLinks>
-                <IconContainer>
-                  <div>
-                    <CiBellOn size="24px" />
-                  </div>
-                  <div>
-                    <CiUser size="24px" />
-                  </div>
-                </IconContainer>
+                <NavLinks href="/instruments/bass">Bass Guitars</NavLinks>
+                <NavLinks href="/instruments/guitar">Electric Guitars</NavLinks>
+
+                {contextUser.username !== "" ? (
+                  <>
+                    <UserContainer>
+                      Welcome {contextUser.username}
+                    </UserContainer>
+                    <IconContainer>
+                      <div>
+                        <CiBellOn size="24px" />
+                      </div>
+                      <div>
+                        <CiUser size="24px" />
+                      </div>
+                    </IconContainer>
+                    <LogoutContainer onClick={handleLogout}>
+                      Logout
+                    </LogoutContainer>
+                  </>
+                ) : (
+                  <NavLinks href="/profile/login">Login or Register</NavLinks>
+                )}
               </OpenMobileNavContainer>
             )}
           </MobileNavContainer>
