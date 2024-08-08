@@ -111,7 +111,6 @@ const MobileTitleHide = styled.div`
 export default function NavBar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { contextUser } = useContext(UserContext);
-  console.log(contextUser);
 
   const handleMobileNav = () => {
     setMobileNavOpen(!mobileNavOpen);
@@ -120,6 +119,13 @@ export default function NavBar() {
   const handleOpenMobileClick = () => {
     console.log("click");
     setMobileNavOpen(!mobileNavOpen);
+  };
+
+  const handleLogout = () => {
+    //delete session
+    sessionStorage.clear();
+    //refresh page
+    window.location.reload();
   };
 
   return (
@@ -140,8 +146,11 @@ export default function NavBar() {
             <NavLinks href="/">Electric Guitars</NavLinks>
           </LeftSideLinks>
           <RightSideUser>
-            {contextUser ? (
-              <div>Welcome {contextUser.username}</div>
+            {contextUser.username !== "" ? (
+              <>
+                <div>Welcome {contextUser.username}</div>
+                <div onClick={handleLogout}>Logout</div>
+              </>
             ) : (
               <NavLinks href="/">Login or Register</NavLinks>
             )}

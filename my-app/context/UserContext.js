@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const UserContext = createContext();
 
@@ -18,7 +18,17 @@ export const UserContextProvider = ({ children }) => {
     password: "",
   });
 
-  console.log(contextUser);
+  //CHECK FOR SESSION DATA IN CASE OF REFRESH
+  useEffect(() => {
+    const serializedData = window.sessionStorage.getItem("userData");
+    if (serializedData) {
+      const userData = JSON.parse(serializedData);
+      setContextUser({
+        username: userData.inputUserName,
+        email: userData.inputUserEmail,
+      });
+    }
+  }, []);
 
   return (
     <UserContext.Provider

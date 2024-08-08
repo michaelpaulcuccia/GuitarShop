@@ -35,6 +35,12 @@ export default function SignUp() {
       email: inputUserEmail,
       password: inputPass,
     });
+    const userData = {
+      inputUserName,
+      inputUserEmail,
+    };
+    const serializedData = JSON.stringify(userData);
+    window.sessionStorage.setItem("userData", serializedData);
     //clear form
     setInputUserName("");
     setInputUserEmail("");
