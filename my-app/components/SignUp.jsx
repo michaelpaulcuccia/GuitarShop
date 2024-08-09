@@ -50,7 +50,7 @@ export default function SignUp() {
 
   return (
     <>
-      <Root onSubmit={handleSubmit} action="/api/users" method="POST">
+      <Root onSubmit={handleSubmit}>
         <ItemContainer>
           <label htmlFor="inputUserName">User Name</label>
           <input
