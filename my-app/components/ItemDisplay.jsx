@@ -6,6 +6,7 @@ import StarHandler from "./StarHandler";
 import Price from "./Text/Price";
 import SlashPrice from "./Text/SlashPrice";
 import { mobileBreakpoint } from "../constants";
+//import Financing from "./Text/FinanceShipCustomerWarranty";
 
 const textShrink = "1330px";
 
@@ -118,6 +119,7 @@ export default function ItemDisplay({
           <ScriptContainer>{description}</ScriptContainer>
         </ContentSide>
       </FlexOne>
+      {/* <Financing /> */}
     </Root>
   );
 }

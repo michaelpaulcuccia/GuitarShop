@@ -1,25 +1,55 @@
-"use client";
 import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import UserContext from "../context/UserContext";
+import Link from "next/link";
+import { mobileBreakpoint } from "../constants";
 import styled from "styled-components";
 
-const Root = styled.form`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+`;
+
 const ItemContainer = styled.div`
   margin: 6px;
-  display; flex;
-  
+
+  @media (max-width: ${mobileBreakpoint}) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .showMobile {
+    display: none;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      display: block;
+    }
+  }
+
   label {
     margin-right: 12px;
+    @media (max-width: ${mobileBreakpoint}) {
+    }
   }
 `;
 
-export default function SignUp() {
+const NonMember = styled.div`
+  margin-top: 18px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+export default function SignLogInForm({ showLinkToSignUp }) {
   const { setContextUser } = useContext(UserContext);
 
   const router = useRouter();
@@ -49,14 +79,16 @@ export default function SignUp() {
   };
 
   return (
-    <>
-      <Root onSubmit={handleSubmit}>
+    <Root>
+      <FormContainer onSubmit={handleSubmit}>
         <ItemContainer>
           <label htmlFor="inputUserName">User Name</label>
           <input
             type="text"
             value={inputUserName}
             onChange={(event) => setInputUserName(event.target.value)}
+            minlength={2}
+            required
           />
         </ItemContainer>
         <ItemContainer>
@@ -65,10 +97,14 @@ export default function SignUp() {
             type="email"
             value={inputUserEmail}
             onChange={(event) => setInputUserEmail(event.target.value)}
+            required
           />
         </ItemContainer>
-        <ItemContainer>
-          <label htmlFor="inputPass">Password (must be 8 characters)</label>
+        <ItemContainer className="shift-mobile">
+          <label htmlFor="inputPass">
+            Password <br className="showMobile" />
+            (must be 8 characters)
+          </label>
           <input
             type="password"
             minLength={8}
@@ -77,8 +113,14 @@ export default function SignUp() {
             onChange={(event) => setInputPass(event.target.value)}
           />
         </ItemContainer>
-        <input type="submit" value="Sign Up" />
-      </Root>
-    </>
+        <input style={{ marginTop: "12px" }} type="submit" value="Sign Up" />
+      </FormContainer>
+      {showLinkToSignUp && (
+        <NonMember>
+          If not a memember, please{" "}
+          <StyledLink href="/profile/signup">sign up</StyledLink>
+        </NonMember>
+      )}
+    </Root>
   );
 }

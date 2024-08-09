@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
-import SignUp from "../../../../components/SignUp";
+import SignLogInForm from "../../../../components/SignLogInForm";
 
 export default function page() {
   return (
     <div>
-      <SignUp />
+      <SignLogInForm showLinkToSignUp={false} />
     </div>
   );
 }
