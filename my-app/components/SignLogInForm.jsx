@@ -87,7 +87,7 @@ export default function SignLogInForm({ showLinkToSignUp }) {
             type="text"
             value={inputUserName}
             onChange={(event) => setInputUserName(event.target.value)}
-            minlength={2}
+            minLength={2}
             required
           />
         </ItemContainer>

@@ -168,6 +168,7 @@ export default function NavBar() {
                   <CiUser size="24px" />
                 </div>
               </IconContainer>
+              <NavLinks href="/cart">Cart</NavLinks>
               <LogoutContainer onClick={handleLogout}>Logout</LogoutContainer>
             </RightSideUser>
           ) : (
@@ -223,6 +224,7 @@ export default function NavBar() {
                         <CiUser size="24px" />
                       </div>
                     </IconContainer>
+                    <NavLinks href="/cart">Cart</NavLinks>
                     <LogoutContainer onClick={handleLogout}>
                       Logout
                     </LogoutContainer>
