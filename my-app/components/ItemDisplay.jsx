@@ -6,13 +6,13 @@ import StarHandler from "./StarHandler";
 import Price from "./Text/Price";
 import SlashPrice from "./Text/SlashPrice";
 import { mobileBreakpoint } from "../constants";
-//import Financing from "./Text/FinanceShipCustomerWarranty";
+import Financing from "./Text/FinanceShipCustomerWarranty";
 
 const textShrink = "1330px";
 
 const Root = styled.div`
-  background: black;
-  color: white;
+  //background: black;
+  //color: white;
   padding: 48px 36px 30px 36px;
 
   .desktop-image {
@@ -47,11 +47,36 @@ const ImageSide = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+`;
+
+const MyButton = styled.div`
+  background: gray;
+  color: white;
+  padding: 8px 25px;
+  width: 30%;
+  border-radius: 50px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:hover {
+    background-color: hsl(0, 0%, 33%); /* Light gray */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+`;
+
 const ContentSide = styled.div`
   margin-left: 30px;
+  padding-top: 20px;
 
   @media (max-width: ${mobileBreakpoint}) {
     margin: 30px 12px 18px 12px;
+    padding-top: 0;
   }
 `;
 
@@ -80,7 +105,6 @@ export default function ItemDisplay({
   description,
   numberAvailable,
 }) {
-  console.log(img[0]);
   return (
     <Root>
       <FlexOne>
@@ -103,6 +127,9 @@ export default function ItemDisplay({
               style={{ marginBottom: "8px" }}
             />
           </div>
+          <ButtonWrapper>
+            <MyButton as="button">Add To Cart</MyButton>
+          </ButtonWrapper>
         </ImageSide>
         <ContentSide>
           <ItemHeadline>
@@ -117,9 +144,9 @@ export default function ItemDisplay({
           <Price>{price}</Price>
           <p>{numberAvailable} left in stock!</p>
           <ScriptContainer>{description}</ScriptContainer>
+          <Financing price={price} />
         </ContentSide>
       </FlexOne>
-      {/* <Financing /> */}
     </Root>
   );
 }

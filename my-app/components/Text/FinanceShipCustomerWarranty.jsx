@@ -6,7 +6,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 
 const ItemWrapper = styled.div`
-  margin-bottom: 18px;
+  margin-top: 20px;
 `;
 
 const Row = styled.div`
