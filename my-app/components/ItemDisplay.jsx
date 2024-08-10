@@ -12,8 +12,6 @@ import Financing from "./Text/FinanceShipCustomerWarranty";
 const textShrink = "1330px";
 
 const Root = styled.div`
-  //background: black;
-  //color: white;
   padding: 48px 36px 30px 36px;
 
   .desktop-image {
@@ -105,6 +103,7 @@ export default function ItemDisplay({
   addOnAmount,
   description,
   numberAvailable,
+  _id,
 }) {
   const { contextUser, addItemToCart } = useContext(UserContext);
 
@@ -115,8 +114,9 @@ export default function ItemDisplay({
       const newItem = {
         brand: brand,
         modelType: modelType,
-        price,
-        numberAvailable,
+        price: price,
+        numberAvailable: numberAvailable,
+        _id: _id,
       };
       // Retrieve the current user data from sessionStorage and update
       const storedData = window.sessionStorage.getItem("userData");
@@ -134,6 +134,7 @@ export default function ItemDisplay({
         brand: brand,
         modelType: modelType,
         price: price,
+        _id: _id,
       });
       window.alert(brand + " " + modelType + " added to cart!");
     } else {

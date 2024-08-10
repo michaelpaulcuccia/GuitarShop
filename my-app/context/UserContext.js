@@ -28,6 +28,20 @@ export const UserContextProvider = ({ children }) => {
     }));
   };
 
+  const removeItemFromCart = (cart, idToRemove) => {
+    // Find the index of the item with the specified ID
+    const index = cart.findIndex((item) => item._id === idToRemove);
+    if (index !== -1) {
+      // Remove the item from the cart
+      cart.splice(index, 1);
+    }
+
+    setContextUser((prevState) => ({
+      ...prevState,
+      cartItems: cart,
+    }));
+  };
+
   //CHECK FOR SESSION DATA IN CASE OF REFRESH
   useEffect(() => {
     const serializedData = window.sessionStorage.getItem("userData");
@@ -49,6 +63,7 @@ export const UserContextProvider = ({ children }) => {
         contextUser,
         setContextUser,
         addItemToCart,
+        removeItemFromCart,
       }}
     >
       {children}

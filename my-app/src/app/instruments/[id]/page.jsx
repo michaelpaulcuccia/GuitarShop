@@ -63,6 +63,7 @@ export default function page() {
           addOnAmount={instrument.addOnAmount}
           description={instrument.description}
           numberAvailable={instrument.numberAvailable}
+          _id={instrument._id}
         />
       )}
     </>

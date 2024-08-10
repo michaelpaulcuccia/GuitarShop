@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../context/UserContext";
 import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 
@@ -30,21 +31,6 @@ const Td = styled.td`
   border-bottom: 1px solid #ddd;
 `;
 
-const testData = [
-  {
-    item: "Fender Precision Bass, Dakota Red",
-    price: "1099.99",
-    qty: 1,
-    totalPrice: "1099.99",
-  },
-  {
-    item: "Silverton 1478",
-    price: "499",
-    qty: 2,
-    totalPrice: "998",
-  },
-];
-
 const PriceContainer = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -63,16 +49,28 @@ const PriceContainer = styled.div`
 
 //TODO: HELPERS
 /*
-  Items are getting overwritten in cart
   Handle more than one of the same item in "Qty" field and "Total Price"
-  Make "Total" dynamic
-  Handle Deleting an item
 */
 
 export default function CartTable({ items }) {
   console.log(items);
-  const handleDelete = () => {
-    console.log("click");
+
+  const { contextUser, removeItemFromCart } = useContext(UserContext);
+
+  const handleDelete = (itemID) => {
+    //update session
+    const index = contextUser.cartItems.findIndex(
+      (item) => item._id === itemID
+    );
+    if (index !== -1) {
+      // Remove the item from the cartItems array
+      contextUser.cartItems.splice(index, 1);
+      // Save updated user data back to sessionStorage
+      const updatedSerializedData = JSON.stringify(contextUser);
+      window.sessionStorage.setItem("userData", updatedSerializedData);
+    }
+    //update context
+    removeItemFromCart(items, itemID);
   };
 
   const totalPrice = items.reduce((accumulator, item) => {
@@ -100,7 +98,7 @@ export default function CartTable({ items }) {
               <Td>{item.price}</Td>
               <Td>1</Td>
               <Td>${item.price}</Td>
-              <Td onClick={handleDelete}>
+              <Td onClick={() => handleDelete(item._id)}>
                 <FaRegTrashAlt />
               </Td>
             </tr>
