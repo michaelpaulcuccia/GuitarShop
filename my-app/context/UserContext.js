@@ -34,9 +34,12 @@ export const UserContextProvider = ({ children }) => {
       setContextUser({
         username: userData.inputUserName,
         email: userData.inputUserEmail,
+        cartItems: userData.cartItems,
       });
     }
   }, []);
+
+  console.log(contextUser);
 
   return (
     <UserContext.Provider

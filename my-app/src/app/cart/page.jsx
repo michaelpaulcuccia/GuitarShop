@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import UserContext from "../../../context/UserContext";
 import CartTable from "../../../components/CartTable";
 
 const TableContainer = styled.div`
@@ -9,10 +10,17 @@ const TableContainer = styled.div`
 `;
 
 export default function page() {
+  const { contextUser } = useContext(UserContext);
+  const { cartItems } = contextUser;
+  console.log(cartItems);
   return (
     <div>
       <TableContainer>
-        <CartTable />
+        {contextUser && contextUser.username !== "" ? (
+          <CartTable items={contextUser.cartItems} />
+        ) : (
+          <div>you must be logged in to shop!</div>
+        )}
       </TableContainer>
     </div>
   );

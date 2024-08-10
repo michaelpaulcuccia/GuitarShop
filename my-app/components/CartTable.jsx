@@ -61,65 +61,53 @@ const PriceContainer = styled.div`
   }
 `;
 
-const TableComponent = () => (
-  <>
-    <Table>
-      <thead>
-        <tr>
-          <Th>Item</Th>
-          <Th>Item Price</Th>
-          <Th>Qty</Th>
-          <Th>Total Price</Th>
-          <Th>Delete Item</Th>
-        </tr>
-      </thead>
-      <tbody>
-        {testData.map((item, i) => (
-          <tr key={i}>
-            <Td>{item.item}</Td>
-            <Td>{item.price}</Td>
-            <Td>{item.qty}</Td>
-            <Td>{item.totalPrice}</Td>
-            <Td>
-              <FaRegTrashAlt />
-            </Td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-    <PriceContainer>
-      <div className="items">Items: 3</div>
-      <div className="price">
-        Total: <span>$2097.99</span>
-      </div>
-    </PriceContainer>
-  </>
-);
-
-export default TableComponent;
-
-//Table Hydration Error: https://github.com/vercel/next.js/discussions/36754
-//USE THIS
+//TODO: HELPERS
 /*
-  <table>
-    <thead>
-      <tr>
-        <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-      </tr>
-      <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-      </tr>
-    </tbody>
-  </table>
+  Handle more than one of the same item in "Qty" field and "Total Price"
+  Makes "Items" and "Total" dynamic
+  Handle Deleting an item
 */
+
+export default function CartTable({ items }) {
+  console.log(items);
+  const handleDelete = () => {
+    console.log("click");
+  };
+
+  return (
+    <>
+      <Table>
+        <thead>
+          <tr>
+            <Th>Item</Th>
+            <Th>Item Price</Th>
+            <Th>Qty</Th>
+            <Th>Total Price</Th>
+            <Th>Delete Item</Th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr key={i}>
+              <Td>
+                {item.brand} {item.modelType}
+              </Td>
+              <Td>{item.price}</Td>
+              <Td>1</Td>
+              <Td>{item.price}</Td>
+              <Td onClick={handleDelete}>
+                <FaRegTrashAlt />
+              </Td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <PriceContainer>
+        <div className="items">Items: {items.length}</div>
+        <div className="price">
+          Total: <span>{items[0].price}</span>
+        </div>
+      </PriceContainer>
+    </>
+  );
+}

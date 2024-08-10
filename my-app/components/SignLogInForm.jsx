@@ -68,6 +68,7 @@ export default function SignLogInForm({ showLinkToSignUp }) {
     const userData = {
       inputUserName,
       inputUserEmail,
+      cartItems: [], // Initialize cartItems as an empty array
     };
     const serializedData = JSON.stringify(userData);
     window.sessionStorage.setItem("userData", serializedData);

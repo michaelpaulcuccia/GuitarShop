@@ -111,13 +111,25 @@ export default function ItemDisplay({
   const handleAddToCart = () => {
     //make sure there is a user
     if (contextUser.username !== "") {
-      console.log("click logged in");
-      window.alert(brand + " " + modelType + " added to cart!");
+      //create an item object
+      const newItem = {
+        brand: brand,
+        modelType: modelType,
+        price,
+        numberAvailable,
+      };
+      // Retrieve the current user data from sessionStorage and update
+      const storedData = window.sessionStorage.getItem("userData");
+      const userData = JSON.parse(storedData);
+      userData.cartItems = [newItem];
+      const updatedSerializedData = JSON.stringify(userData);
+      window.sessionStorage.setItem("userData", updatedSerializedData);
+      //add to context
       addItemToCart({
         brand: brand,
       });
+      window.alert(brand + " " + modelType + " added to cart!");
     } else {
-      console.log("click NOT logged in");
       window.alert("you must be logged in to shop!");
     }
   };
