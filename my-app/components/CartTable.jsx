@@ -63,6 +63,7 @@ const PriceContainer = styled.div`
 
 //TODO: HELPERS
 /*
+  Items are getting overwritten in cart
   Handle more than one of the same item in "Qty" field and "Total Price"
   Makes "Items" and "Total" dynamic
   Handle Deleting an item

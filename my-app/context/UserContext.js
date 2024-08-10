@@ -22,7 +22,9 @@ export const UserContextProvider = ({ children }) => {
   const addItemToCart = (item) => {
     setContextUser((prevState) => ({
       ...prevState,
-      cartItems: [item],
+      cartItems: Array.isArray(prevState.cartItems)
+        ? [...prevState.cartItems, item] // Append item if cartItems is an array
+        : [item], // Initialize with item if cartItems is not an array
     }));
   };
 

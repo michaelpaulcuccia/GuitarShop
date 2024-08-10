@@ -120,13 +120,20 @@ export default function ItemDisplay({
       };
       // Retrieve the current user data from sessionStorage and update
       const storedData = window.sessionStorage.getItem("userData");
-      const userData = JSON.parse(storedData);
-      userData.cartItems = [newItem];
+      let userData = { cartItems: [] }; // Default value in case there's no data
+      if (storedData) {
+        userData = JSON.parse(storedData);
+      }
+      // Add the new item to the existing cartItems array
+      userData.cartItems = [...userData.cartItems, newItem];
+      // Save updated user data back to sessionStorage
       const updatedSerializedData = JSON.stringify(userData);
       window.sessionStorage.setItem("userData", updatedSerializedData);
       //add to context
       addItemToCart({
         brand: brand,
+        modelType: modelType,
+        price: price,
       });
       window.alert(brand + " " + modelType + " added to cart!");
     } else {
