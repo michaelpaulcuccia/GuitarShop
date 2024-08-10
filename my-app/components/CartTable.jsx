@@ -65,7 +65,7 @@ const PriceContainer = styled.div`
 /*
   Items are getting overwritten in cart
   Handle more than one of the same item in "Qty" field and "Total Price"
-  Makes "Items" and "Total" dynamic
+  Make "Total" dynamic
   Handle Deleting an item
 */
 
@@ -74,6 +74,10 @@ export default function CartTable({ items }) {
   const handleDelete = () => {
     console.log("click");
   };
+
+  const totalPrice = items.reduce((accumulator, item) => {
+    return accumulator + item.price;
+  }, 0); // Initial value is 0
 
   return (
     <>
@@ -95,7 +99,7 @@ export default function CartTable({ items }) {
               </Td>
               <Td>{item.price}</Td>
               <Td>1</Td>
-              <Td>{item.price}</Td>
+              <Td>${item.price}</Td>
               <Td onClick={handleDelete}>
                 <FaRegTrashAlt />
               </Td>
@@ -106,7 +110,7 @@ export default function CartTable({ items }) {
       <PriceContainer>
         <div className="items">Items: {items.length}</div>
         <div className="price">
-          Total: <span>{items[0].price}</span>
+          Total: <span>${totalPrice}</span>
         </div>
       </PriceContainer>
     </>
