@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import UserContext from "../context/UserContext";
 import ItemHeadline from "./Text/ItemHeadline";
 import StarHandler from "./StarHandler";
 import Price from "./Text/Price";
@@ -105,6 +106,22 @@ export default function ItemDisplay({
   description,
   numberAvailable,
 }) {
+  const { contextUser, addItemToCart } = useContext(UserContext);
+
+  const handleAddToCart = () => {
+    //make sure there is a user
+    if (contextUser.username !== "") {
+      console.log("click logged in");
+      window.alert(brand + " " + modelType + " added to cart!");
+      addItemToCart({
+        brand: brand,
+      });
+    } else {
+      console.log("click NOT logged in");
+      window.alert("you must be logged in to shop!");
+    }
+  };
+
   return (
     <Root>
       <FlexOne>
@@ -128,7 +145,9 @@ export default function ItemDisplay({
             />
           </div>
           <ButtonWrapper>
-            <MyButton as="button">Add To Cart</MyButton>
+            <MyButton onClick={handleAddToCart} as="button">
+              Add To Cart
+            </MyButton>
           </ButtonWrapper>
         </ImageSide>
         <ContentSide>

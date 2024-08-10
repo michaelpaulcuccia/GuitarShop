@@ -16,7 +16,15 @@ export const UserContextProvider = ({ children }) => {
     username: "",
     email: "",
     password: "",
+    cartItems: [],
   });
+
+  const addItemToCart = (item) => {
+    setContextUser((prevState) => ({
+      ...prevState,
+      cartItems: [item],
+    }));
+  };
 
   //CHECK FOR SESSION DATA IN CASE OF REFRESH
   useEffect(() => {
@@ -35,6 +43,7 @@ export const UserContextProvider = ({ children }) => {
       value={{
         contextUser,
         setContextUser,
+        addItemToCart,
       }}
     >
       {children}
