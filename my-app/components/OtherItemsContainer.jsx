@@ -10,7 +10,7 @@ const Root = styled.div`
   overflow: hidden;
 `;
 
-export default function OtherItemsContainer() {
+export default function OtherItemsContainer({ filterType }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,17 @@ export default function OtherItemsContainer() {
         }
         const result = await response.json();
 
-        setData(result);
+        if (filterType && filterType !== "") {
+          if (filterType === "bass") {
+            const onlyBass = result.filter((item) => item.isBass === true);
+            setData(onlyBass);
+          } else if (filterType === "guitar") {
+            const onlyGuitars = result.filter((item) => item.isBass === false);
+            setData(onlyGuitars);
+          }
+        } else {
+          setData(result);
+        }
       } catch (error) {
         console.log(error);
       } finally {

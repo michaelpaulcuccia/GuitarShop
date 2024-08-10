@@ -1,7 +1,11 @@
-import React from 'react'
+"use client";
+import React from "react";
+import OtherItemsContainer from "../../../components/OtherItemsContainer";
 
 export default function page() {
   return (
-    <div>welcome to instruments</div>
-  )
+    <>
+      <OtherItemsContainer />
+    </>
+  );
 }
