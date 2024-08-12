@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useContext } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserContext from "../context/UserContext";
 import { Dancing_Script } from "next/font/google";
@@ -122,6 +123,7 @@ const MobileTitleHide = styled.div`
 export default function NavBar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { contextUser } = useContext(UserContext);
+  const router = useRouter();
 
   const handleMobileNav = () => {
     setMobileNavOpen(!mobileNavOpen);
@@ -135,8 +137,7 @@ export default function NavBar() {
   const handleLogout = () => {
     //delete session
     sessionStorage.clear();
-    //refresh page
-    window.location.reload();
+    router.push("/");
   };
 
   return (

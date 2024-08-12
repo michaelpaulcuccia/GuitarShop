@@ -11,17 +11,29 @@ const TableContainer = styled.div`
 
 export default function page() {
   const { contextUser } = useContext(UserContext);
-  const { cartItems } = contextUser;
-  console.log(cartItems);
+
   return (
     <div>
+      {/* IF NOT LOGGED IN */}
+      {/* IF LOGGED IN BUT CART EMPTY */}
+      {/* IF LOGGED IN, WITH CART ITEMS */}
       <TableContainer>
-        {contextUser && contextUser.username !== "" ? (
-          <CartTable items={contextUser.cartItems} />
+        {contextUser ? (
+          contextUser.username !== "" ? (
+            contextUser.cartItems.length === 0 ? (
+              <div>There are no items in your cart</div>
+            ) : (
+              <CartTable items={contextUser.cartItems} />
+            )
+          ) : (
+            <div>You must be logged in</div>
+          )
         ) : (
-          <div>you must be logged in to shop!</div>
+          <div>You must be logged in</div>
         )}
       </TableContainer>
     </div>
   );
 }
+
+//           <CartTable items={contextUser.cartItems} />

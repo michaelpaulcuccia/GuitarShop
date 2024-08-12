@@ -34,10 +34,21 @@ const ItemContainer = styled.div`
     }
   }
 
-  label {
-    margin-right: 12px;
-    @media (max-width: ${mobileBreakpoint}) {
-    }
+  input {
+    padding: 6px 12px;
+  }
+`;
+
+const MyButton = styled.input`
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  border: none;
+  color: white;
+  background: #1877f2;
+
+  &:hover {
+    background: #166fe5;
   }
 `;
 
@@ -83,38 +94,35 @@ export default function SignLogInForm({ showLinkToSignUp }) {
     <Root>
       <FormContainer onSubmit={handleSubmit}>
         <ItemContainer>
-          <label htmlFor="inputUserName">User Name</label>
           <input
             type="text"
             value={inputUserName}
             onChange={(event) => setInputUserName(event.target.value)}
             minLength={2}
             required
+            placeholder="User Name"
           />
         </ItemContainer>
         <ItemContainer>
-          <label htmlFor="inputUserEmail">User Email</label>
           <input
             type="email"
             value={inputUserEmail}
             onChange={(event) => setInputUserEmail(event.target.value)}
             required
+            placeholder="Email"
           />
         </ItemContainer>
         <ItemContainer className="shift-mobile">
-          <label htmlFor="inputPass">
-            Password <br className="showMobile" />
-            (must be 8 characters)
-          </label>
           <input
             type="password"
             minLength={8}
             required
             value={inputPass}
             onChange={(event) => setInputPass(event.target.value)}
+            placeholder="Password"
           />
         </ItemContainer>
-        <input style={{ marginTop: "12px" }} type="submit" value="Sign Up" />
+        <MyButton type="submit" value="Sign Up" />
       </FormContainer>
       {showLinkToSignUp && (
         <NonMember>
