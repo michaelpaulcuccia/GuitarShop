@@ -24,7 +24,9 @@ const Root = styled.div`
   .mobile-image {
     display: none;
     @media (max-width: ${mobileBreakpoint}) {
-      display: flex;-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
 `;
@@ -66,6 +68,18 @@ const MyButton = styled.div`
   &:hover {
     background-color: hsl(0, 0%, 33%); /* Light gray */
     transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  @media (max-width: ${mobileBreakpoint}) {
+    display: none;
+  }
+`;
+
+const MobileButton = styled(MyButton)`
+  @media (max-width: ${mobileBreakpoint}) {
+    display: block;
+    width: 60%;
+    margin: 0 auto;
   }
 `;
 
@@ -163,6 +177,9 @@ export default function ItemDisplay({
               height={224} //197
               style={{ marginBottom: "8px" }}
             />
+            <MobileButton onClick={handleAddToCart} as="button">
+              Add To Cart
+            </MobileButton>
           </div>
           <ButtonWrapper>
             <MyButton onClick={handleAddToCart} as="button">
