@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import UserContext from "../context/UserContext";
 import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { mobileBreakpoint } from "../constants";
 
 const Table = styled.table`
   width: 100%;
@@ -19,16 +20,26 @@ const Table = styled.table`
 
 const Th = styled.th`
   text-align: left;
-  font-size: 1.2em;
+  font-size: 20px;
   font-weight: bold;
   padding: 10px;
   border-bottom: 2px solid #ddd;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    font-size: 16px;
+    padding: 8px;
+  }
 `;
 
 const Td = styled.td`
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    font-size: 12px;
+    padding: 8px;
+  }
 `;
 
 const PriceContainer = styled.div`
@@ -36,8 +47,17 @@ const PriceContainer = styled.div`
   justify-content: flex-end;
   margin-top: 24px;
 
+  @media (max-width: ${mobileBreakpoint}) {
+    font-size: 14px;
+    padding-right: 8px;
+  }
+
   .items {
     margin-right: 24px;
+
+    @media (max-width: ${mobileBreakpoint}) {
+      margin-right: 12px;
+    }
   }
 
   .price {
@@ -77,6 +97,8 @@ export default function CartTable({ items }) {
     return accumulator + item.price;
   }, 0); // Initial value is 0
 
+  const totalPriceFixed = totalPrice.toFixed(2);
+
   return (
     <>
       <Table>
@@ -108,7 +130,7 @@ export default function CartTable({ items }) {
       <PriceContainer>
         <div className="items">Items: {items.length}</div>
         <div className="price">
-          Total: <span>${totalPrice}</span>
+          Total: <span>${totalPriceFixed}</span>
         </div>
       </PriceContainer>
     </>

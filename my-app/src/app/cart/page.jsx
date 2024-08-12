@@ -3,10 +3,15 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../../../context/UserContext";
 import CartTable from "../../../components/CartTable";
+import { mobileBreakpoint } from "../../../constants";
 
 const TableContainer = styled.div`
   margin: 32px auto;
   width: 70%;
+
+  @media (max-width: ${mobileBreakpoint}) {
+    width: 100%;
+  }
 `;
 
 export default function page() {
