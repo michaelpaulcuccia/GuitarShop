@@ -87,21 +87,14 @@ export default function Item({
             {brand} {modelType}
           </div>
           <StarHandler stars={stars} />
-          {/* {addOn && (
-            <>
-              <br />
-              <SlashPrice price={price} addOn={addOnAmount} />
-            </>
-          )}
-          <Price>{price}</Price> */}
           <div className="learn-more-container">
             <LearnMoreButton href={_id} />
           </div>
           <Image
             src={`${images}`}
             alt={`${brand}`}
-            width={263} //273
-            height={224} //197
+            width={263}
+            height={224}
             style={{ marginTop: "12px" }}
           />
         </>

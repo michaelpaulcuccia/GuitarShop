@@ -124,6 +124,12 @@ export default function ItemDisplay({
   const handleAddToCart = () => {
     //make sure there is a user
     if (contextUser.username !== "") {
+      //TODO:
+      //CHECK HOW MANY OF THAT ITEM IS IN STOCK
+      //CHECK HOW MANY OF THAT ITEM IS IN CART
+      //IF NumOfThisItemsInStock is less than than NumOfThisItemsInCart
+      //EXIT
+      //...............................
       //create an item object
       const newItem = {
         brand: brand,

@@ -130,7 +130,6 @@ export default function NavBar() {
   };
 
   const handleOpenMobileClick = () => {
-    console.log("click");
     setMobileNavOpen(!mobileNavOpen);
   };
 

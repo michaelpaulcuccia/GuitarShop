@@ -73,8 +73,6 @@ const PriceContainer = styled.div`
 */
 
 export default function CartTable({ items }) {
-  console.log(items);
-
   const { contextUser, removeItemFromCart } = useContext(UserContext);
 
   const handleDelete = (itemID) => {
