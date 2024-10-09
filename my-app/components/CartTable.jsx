@@ -104,7 +104,6 @@ export default function CartTable({ items }) {
           <tr>
             <Th>Item</Th>
             <Th>Item Price</Th>
-            <Th>Qty</Th>
             <Th>Total Price</Th>
             <Th>Delete Item</Th>
           </tr>
@@ -116,7 +115,6 @@ export default function CartTable({ items }) {
                 {item.brand} {item.modelType}
               </Td>
               <Td>{item.price}</Td>
-              <Td>1</Td>
               <Td>${item.price}</Td>
               <Td onClick={() => handleDelete(item._id)}>
                 <FaRegTrashAlt />

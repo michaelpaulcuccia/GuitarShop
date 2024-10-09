@@ -66,8 +66,8 @@ const MyButton = styled.div`
   outline: none;
 
   &:hover {
-    background-color: hsl(0, 0%, 33%); /* Light gray */
-    transition: background-color 0.3s ease; /* Smooth transition */
+    background-color: hsl(0, 0%, 33%);
+    transition: background-color 0.3s ease;
   }
 
   @media (max-width: ${mobileBreakpoint}) {
@@ -122,43 +122,59 @@ export default function ItemDisplay({
   const { contextUser, addItemToCart } = useContext(UserContext);
 
   const handleAddToCart = () => {
-    //make sure there is a user
-    if (contextUser.username !== "") {
-      //TODO:
-      //CHECK HOW MANY OF THAT ITEM IS IN STOCK
-      //CHECK HOW MANY OF THAT ITEM IS IN CART
-      //IF NumOfThisItemsInStock is less than than NumOfThisItemsInCart
-      //EXIT
-      //...............................
-      //create an item object
-      const newItem = {
-        brand: brand,
-        modelType: modelType,
-        price: price,
-        numberAvailable: numberAvailable,
-        _id: _id,
-      };
-      // Retrieve the current user data from sessionStorage and update
-      const storedData = window.sessionStorage.getItem("userData");
-      let userData = { cartItems: [] }; // Default value in case there's no data
-      if (storedData) {
-        userData = JSON.parse(storedData);
+    if (contextUser?.username !== "") {
+      //Ensure that cartItems is defined as an array, even if it's empty
+      const cartItems = contextUser.cartItems || [];
+
+      //Calculate the total number of this item in the cart based on its _id
+      const totalQuantityInCart = cartItems
+        .filter((item) => item._id === _id)
+        .reduce((total, item) => total + (item.quantity || 1), 0);
+
+      // Check if adding another item would exceed the number available
+      if (totalQuantityInCart < numberAvailable) {
+        // Create the new item to add or update
+        const newItem = {
+          brand: brand,
+          modelType: modelType,
+          price: price,
+          numberAvailable: numberAvailable,
+          _id: _id,
+          quantity: 1, // Default quantity for a new item being added
+        };
+
+        // Retrieve the current user data from sessionStorage and update
+        const storedData = window.sessionStorage.getItem("userData");
+        let userData = { cartItems: [] }; // Default value in case there's no data
+
+        if (storedData) {
+          userData = JSON.parse(storedData);
+        }
+
+        // Check if the item already exists in the cart
+        const existingCartItemIndex = userData.cartItems.findIndex(
+          (item) => item._id === _id
+        );
+
+        if (existingCartItemIndex >= 0) {
+          //If the item exists, increment its quantity
+          userData.cartItems[existingCartItemIndex].quantity += 1;
+        } else {
+          //If it doesn't exist, add the new item to the cart
+          userData.cartItems.push(newItem);
+        }
+
+        const updatedSerializedData = JSON.stringify(userData);
+        window.sessionStorage.setItem("userData", updatedSerializedData);
+
+        addItemToCart(newItem);
+
+        window.alert(`${brand} ${modelType} added to cart!`);
+      } else {
+        window.alert("There's no more of this item available.");
       }
-      // Add the new item to the existing cartItems array
-      userData.cartItems = [...userData.cartItems, newItem];
-      // Save updated user data back to sessionStorage
-      const updatedSerializedData = JSON.stringify(userData);
-      window.sessionStorage.setItem("userData", updatedSerializedData);
-      //add to context
-      addItemToCart({
-        brand: brand,
-        modelType: modelType,
-        price: price,
-        _id: _id,
-      });
-      window.alert(brand + " " + modelType + " added to cart!");
     } else {
-      window.alert("you must be logged in to shop!");
+      window.alert("You must be logged in to shop!");
     }
   };
 
